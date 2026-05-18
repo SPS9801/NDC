@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VPC-aws</title>
+  <style>
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css");
+
+  body {
+    font-family: Georgia, Cambria, serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #373D49;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.5em; }
+  h3 { font-size: 1.25em; }
+  a { color: #35D7BB; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: "Ubuntu Mono", Monaco, monospace;
+    background: #F5F7FA;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+  }
+  pre {
+    background: #F5F7FA;
+    padding: 1em;
+    border-radius: 3px;
+    overflow-x: auto;
+  }
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0;
+    color: #333;
+  }
+  pre code { background: none; padding: 0; }
+  blockquote {
+    border-left: 3px solid #A0AABF;
+    padding-left: 1em;
+    margin-left: 0;
+    font-style: italic;
+    color: #666;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #E8E8E8;
+    padding: 0.5em;
+    text-align: left;
+  }
+  th {
+    background: #F5F7FA;
+    font-weight: 600;
+  }
+  #preview .table {
+    width: auto;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+</style>
+</head>
+<body id="preview">
+<h1 class="code-line has-line-data" data-line-start="0" data-line-end="1"><a id="Information_Security_0"></a>Information Security</h1>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="5" data-line-end="6"><a id="WHAT_IS_INFORMATION_SECURITY_5"></a>WHAT IS INFORMATION SECURITY?</h1>
+<h2 class="code-line has-line-data" data-line-start="7" data-line-end="8"><a id="Think_of_it_Like_This_7"></a>Think of it Like This…</h2>
+<pre><code class="has-line-data" data-line-start="10" data-line-end="20">Imagine you have a DIARY with your personal secrets.
+
+You want to:
+✓ Keep it PRIVATE (only you can read it)
+✓ Make sure nobody CHANGES what you wrote
+✓ Make sure it's AVAILABLE when you want to read it
+
+This is exactly what Information Security does
+but for DIGITAL DATA (computers, phones, internet)!
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="21" data-line-end="22"><a id="Simple_Definition_21"></a>Simple Definition</h2>
+<p class="has-line-data" data-line-start="23" data-line-end="24"><strong>Information Security = Protecting digital information from bad people and accidents</strong></p>
+<pre><code class="has-line-data" data-line-start="26" data-line-end="48">WHAT WE PROTECT:
+┌─────────────────────────────────────────────────────┐
+│                                                     │
+│  YOUR PERSONAL DATA:                                │
+│  • Bank account details                             │
+│  • Passwords                                        │
+│  • Personal photos                                  │
+│  • Private messages                                 │
+│                                                     │
+│  COMPANY DATA:                                      │
+│  • Customer information                             │
+│  • Business secrets                                 │
+│  • Financial records                                │
+│  • Employee details                                 │
+│                                                     │
+│  FROM:                                              │
+│  • Hackers                                          │
+│  • Viruses                                          │
+│  • Accidental deletion                              │
+│  • Natural disasters                                │
+└─────────────────────────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="51" data-line-end="52"><a id="The_CIA_Triangle_Most_Important_Concept_51"></a>The CIA Triangle (Most Important Concept!)</h2>
+<pre><code class="has-line-data" data-line-start="54" data-line-end="66">Think of CIA as THREE PROMISES you make about data:
+
+        🔒 CONFIDENTIALITY
+        &quot;Only the right people can see it&quot;
+              /\
+             /  \
+            /    \
+           /      \
+          /________\
+   ✅ INTEGRITY    📡 AVAILABILITY
+  &quot;Nobody changed it&quot;  &quot;Always accessible&quot;
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="67" data-line-end="68"><a id="1_Confidentiality_PRIVACY_67"></a>1. Confidentiality = PRIVACY</h3>
+<pre><code class="has-line-data" data-line-start="70" data-line-end="88">SIMPLE MEANING:
+Only authorized (permitted) people can access the data.
+
+REAL LIFE EXAMPLE:
+Your WhatsApp messages should only be read by YOU
+and the person you sent them to.
+NOT by strangers or hackers!
+
+MORE EXAMPLES:
+✓ Your ATM PIN - only YOU should know it
+✓ Your medical records - only your doctor should see them
+✓ Your salary - only HR should know it
+
+HOW WE ACHIEVE IT:
+→ Passwords (keep data locked)
+→ Encryption (scramble data so only right person can read)
+→ Access control (only let authorized people in)
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="89" data-line-end="90"><a id="2_Integrity_ACCURACY_NO_TAMPERING_89"></a>2. Integrity = ACCURACY / NO TAMPERING</h3>
+<pre><code class="has-line-data" data-line-start="92" data-line-end="111">SIMPLE MEANING:
+Data should be CORRECT and UNCHANGED 
+unless authorized person changes it.
+
+REAL LIFE EXAMPLE:
+Imagine you scored 95 marks in exam.
+Someone HACKS the system and changes it to 45.
+That is an INTEGRITY violation!
+
+MORE EXAMPLES:
+✓ Bank balance should not be secretly changed
+✓ Medical prescription should not be altered
+✓ Legal documents should not be tampered with
+
+HOW WE ACHIEVE IT:
+→ Hashing (like a fingerprint for data)
+→ Digital signatures
+→ Audit logs (keep track of all changes)
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="112" data-line-end="113"><a id="3_Availability_ALWAYS_WORKING_112"></a>3. Availability = ALWAYS WORKING</h3>
+<pre><code class="has-line-data" data-line-start="115" data-line-end="133">SIMPLE MEANING:
+The system should work WHEN YOU NEED IT.
+
+REAL LIFE EXAMPLE:
+Imagine you go to ATM at midnight for emergency cash.
+The ATM says &quot;System Down - Try Later&quot;
+That is an AVAILABILITY problem!
+
+MORE EXAMPLES:
+✓ Hospital system must work 24/7 (life or death!)
+✓ Banking apps must be available always
+✓ Google/Gmail should not go down
+
+HOW WE ACHIEVE IT:
+→ Backup systems (if one fails, another works)
+→ Regular maintenance
+→ Protection against attacks that shut systems down
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="134" data-line-end="135"><a id="Quick_Test_CIA_or_Not_134"></a>Quick Test - CIA or Not?</h3>
+<pre><code class="has-line-data" data-line-start="137" data-line-end="155">SITUATION → Which CIA property is violated?
+
+1. Hacker reads your private emails
+   → CONFIDENTIALITY violated ✓
+
+2. Someone changes your bank balance from 
+   ₹50,000 to ₹5,000
+   → INTEGRITY violated ✓
+
+3. Online exam website crashes during your exam
+   → AVAILABILITY violated ✓
+
+4. Hacker steals and publishes your private photos
+   → CONFIDENTIALITY violated ✓
+
+5. Ransomware locks all hospital computers
+   → AVAILABILITY violated ✓
+</code></pre>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="158" data-line-end="159"><a id="PART_2_WHY_DO_WE_NEED_SECURITY_158"></a>PART 2: WHY DO WE NEED SECURITY?</h1>
+<h2 class="code-line has-line-data" data-line-start="160" data-line-end="161"><a id="The_Simple_Answer_160"></a>The Simple Answer</h2>
+<pre><code class="has-line-data" data-line-start="163" data-line-end="187">Because BAD THINGS HAPPEN when we don't have security!
+
+REAL EXAMPLES FROM INDIA:
+
+📰 NEWS HEADLINE 1:
+&quot;AIIMS Delhi Hospital Hacked (2022)&quot;
+→ Patient data of 4 CRORE people stolen
+→ Hospital operations stopped for days
+→ Doctors couldn't access patient records
+→ Lives were at risk!
+
+📰 NEWS HEADLINE 2:  
+&quot;BigBasket Data Breach (2020)&quot;
+→ 20 MILLION customer details stolen
+→ Sold on dark web for ₹30 lakhs
+→ Phone numbers, addresses leaked
+→ Customers received fraud calls
+
+📰 NEWS HEADLINE 3:
+&quot;UPI Fraud Growing in India&quot;
+→ ₹1,000 crore+ lost every year
+→ Fake UPI apps stealing money
+→ Phishing links on WhatsApp
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="188" data-line-end="189"><a id="Why_Security_is_Like_Insurance_188"></a>Why Security is Like Insurance</h2>
+<pre><code class="has-line-data" data-line-start="191" data-line-end="205">THINK OF IT THIS WAY:
+
+You pay ₹5,000/year for car insurance.
+You don't WANT to use it, but it's there for safety.
+
+SAME WITH SECURITY:
+
+COST OF SECURITY:          vs    COST OF NO SECURITY:
+₹50,000 for antivirus            ₹50 LAKH for data breach
+₹1 lakh for firewall             ₹1 CRORE for ransomware
+₹20,000 for training             Jail time for non-compliance
+
+ALWAYS CHEAPER TO PREVENT THAN TO FIX!
+</code></pre>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="208" data-line-end="209"><a id="PART_3_THE_MONEY_FACTOR_208"></a>PART 3: THE MONEY FACTOR</h1>
+<h2 class="code-line has-line-data" data-line-start="210" data-line-end="211"><a id="How_Much_Does_Cybercrime_Cost_210"></a>How Much Does Cybercrime Cost?</h2>
+<pre><code class="has-line-data" data-line-start="213" data-line-end="226">GLOBAL PICTURE:
+
+💰 Cybercrime costs the world:
+   $6 TRILLION every year (2021)
+   That's more than India's GDP!
+
+💰 Average cost of ONE data breach:
+   $4.45 MILLION = About ₹37 CRORE
+
+INDIA SPECIFIC:
+💰 India loses ₹1.25 lakh crore per year to cybercrime
+💰 Every minute, ₹24 lakhs is lost to cybercrime in India!
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="227" data-line-end="228"><a id="What_Happens_After_a_Breach_227"></a>What Happens After a Breach?</h2>
+<pre><code class="has-line-data" data-line-start="230" data-line-end="249">WHEN A COMPANY GETS HACKED:
+
+IMMEDIATELY:
+❌ They lose money (directly stolen or ransom)
+❌ System goes down (no work = no income)
+❌ They have to hire experts to fix it
+
+LATER:
+❌ Customers lose trust and leave
+❌ Stock price drops (company value decreases)
+❌ Government fines (for not protecting data)
+❌ Legal cases from affected customers
+
+EXAMPLE - EQUIFAX (USA, 2017):
+→ 147 million people's data stolen
+→ Had to pay $575 MILLION fine
+→ CEO had to resign
+→ Company reputation destroyed
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="250" data-line-end="251"><a id="Cost_Comparison_Simple_Table_250"></a>Cost Comparison - Simple Table</h2>
+<pre><code class="has-line-data" data-line-start="253" data-line-end="267">┌────────────────────────────┬──────────────────────────────┐
+│   SECURITY INVESTMENT      │   COST IF HACKED             │
+├────────────────────────────┼──────────────────────────────┤
+│ Antivirus: ₹5,000/year    │ Virus removal: ₹50,000+      │
+├────────────────────────────┼──────────────────────────────┤
+│ Security training: ₹2,000  │ Phishing loss: ₹5 lakh+      │
+├────────────────────────────┼──────────────────────────────┤
+│ Backup system: ₹10,000     │ Data recovery: ₹2 lakh+      │
+├────────────────────────────┼──────────────────────────────┤
+│ Firewall: ₹20,000          │ Breach cleanup: ₹1 crore+    │
+└────────────────────────────┴──────────────────────────────┘
+
+SIMPLE RULE: ₹1 spent on security = ₹4-7 saved later!
+</code></pre>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="270" data-line-end="271"><a id="PART_4_INTERNET_STATISTICS_270"></a>PART 4: INTERNET STATISTICS</h1>
+<h2 class="code-line has-line-data" data-line-start="272" data-line-end="273"><a id="The_Internet_is_HUGE_272"></a>The Internet is HUGE</h2>
+<pre><code class="has-line-data" data-line-start="275" data-line-end="294">INTERNET BY NUMBERS (2024):
+
+👥 5.4 BILLION people use the internet
+   (That's 67% of ALL people on Earth!)
+
+📱 15 BILLION devices connected to internet
+   (Phones, laptops, smart TVs, smart fridges!)
+
+📧 333 BILLION emails sent EVERY DAY
+   (Most are spam or phishing!)
+
+💬 100 BILLION WhatsApp messages DAILY
+   (That's 12 messages for every person on Earth!)
+
+🇮🇳 INDIA SPECIFIC:
+→ 900 million internet users
+→ 2nd largest in the world
+→ 13 billion UPI transactions per month
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="295" data-line-end="296"><a id="Attacks_Happening_RIGHT_NOW_295"></a>Attacks Happening RIGHT NOW</h2>
+<pre><code class="has-line-data" data-line-start="298" data-line-end="313">SCARY STATISTICS:
+
+⚡ 1 cyberattack happens every 39 seconds
+   While you read this page = someone got attacked!
+
+🦠 300,000 NEW malware (viruses) created EVERY DAY
+   That's one new virus every 0.3 seconds!
+
+📧 3.4 BILLION phishing emails sent daily
+   &quot;Your account will be blocked! Click here...&quot;
+   We all get these!
+
+💰 Ransomware attacks: 1.7 MILLION per day
+   Ransomware = &quot;We locked your computer, pay us money&quot;
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="314" data-line-end="315"><a id="OWASP_Web_Security_Statistics_314"></a>OWASP - Web Security Statistics</h2>
+<pre><code class="has-line-data" data-line-start="317" data-line-end="344">OWASP = Open Web Application Security Project
+They study website security problems worldwide.
+
+OWASP TOP 10 (Most Common Website Problems):
+
+RANK  PROBLEM                          HOW MANY WEBSITES AFFECTED
+─────────────────────────────────────────────────────────────────
+#1    Broken Access Control            94% of websites!
+      (People can access restricted    Nearly ALL websites
+       areas they shouldn't)           have this problem!
+
+#2    Cryptographic Failures           83% of websites
+      (Passwords stored without        Like leaving your
+       proper security)                diary unlocked!
+
+#3    Injection Attacks (SQL/XSS)      94% of websites
+      (Hackers put evil code           Typing harmful commands
+       in input boxes)                 in search boxes
+
+#4    Insecure Design                  75% of websites
+      (Security not thought            Building without
+       about from the start)           a proper plan
+
+#5    Security Misconfiguration        90% of websites
+      (Wrong settings that             Using default
+       leave gaps)                     passwords!
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="345" data-line-end="346"><a id="Simple_OWASP_Examples_345"></a>Simple OWASP Examples</h2>
+<h3 class="code-line has-line-data" data-line-start="347" data-line-end="348"><a id="SQL_Injection_Simple_Explanation_347"></a>SQL Injection (Simple Explanation)</h3>
+<pre><code class="has-line-data" data-line-start="350" data-line-end="371">WHAT IS IT?
+Hacker types evil commands in a website form
+instead of normal text.
+
+NORMAL PERSON types in login box:
+Username: alice
+Password: mypassword123
+
+HACKER types in login box:
+Username: ' OR 1=1 --
+Password: anything
+
+WHAT HAPPENS?
+The evil command fools the database:
+&quot;Give access to anyone where 1=1&quot;
+(1 always equals 1, so EVERYONE gets access!)
+
+HOW TO PREVENT:
+→ Website must clean all input before using it
+→ Use &quot;parameterized queries&quot; (a safe way to ask database)
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="372" data-line-end="373"><a id="CrossSite_Scripting_XSS_Simple_Explanation_372"></a>Cross-Site Scripting - XSS (Simple Explanation)</h3>
+<pre><code class="has-line-data" data-line-start="375" data-line-end="391">WHAT IS IT?
+Hacker puts evil code inside a website.
+When you visit that page, the code runs on YOUR computer!
+
+EXAMPLE:
+You visit a forum website.
+Hacker posted this in a comment:
+&lt;script&gt;steal_your_cookies()&lt;/script&gt;
+
+When you view that comment, the script RUNS
+and steals your login session!
+
+HOW TO PREVENT:
+→ Website should block/remove HTML tags from user input
+→ Never trust what users type in forms
+</code></pre>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="394" data-line-end="395"><a id="PART_5_VULNERABILITY_THREAT_AND_RISK_394"></a>PART 5: VULNERABILITY, THREAT, AND RISK</h1>
+<h2 class="code-line has-line-data" data-line-start="396" data-line-end="397"><a id="Simple_Definitions_First_396"></a>Simple Definitions First</h2>
+<pre><code class="has-line-data" data-line-start="399" data-line-end="418">Let's use a HOUSE ANALOGY to understand:
+
+YOUR HOUSE = Your Computer System
+YOUR VALUABLES = Your Data
+
+VULNERABILITY = A weakness
+&quot;The back door has a broken lock&quot;
+
+THREAT = Someone/something that can cause harm
+&quot;A burglar is walking around your neighborhood&quot;
+
+RISK = The danger that actually faces you
+&quot;Burglar MIGHT come through your broken back door&quot;
+
+RISK = THREAT + VULNERABILITY
+If no broken lock → Burglar can't enter → No risk
+If no burglar → Broken lock doesn't matter → No risk
+BOTH need to exist for RISK to be real!
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="419" data-line-end="420"><a id="Vulnerability_Detailed_419"></a>Vulnerability - Detailed</h2>
+<pre><code class="has-line-data" data-line-start="422" data-line-end="456">VULNERABILITY = A weakness or flaw
+
+TYPES OF VULNERABILITIES:
+
+1. SOFTWARE VULNERABILITY
+   Example: Windows hasn't been updated for 2 years
+   The old version has known security holes!
+   
+   Like: A house with cracked walls
+   
+2. WEAK PASSWORD
+   Example: Password is &quot;123456&quot; or &quot;password&quot;
+   Hackers can guess this in seconds!
+   
+   Like: Your &quot;lock&quot; is just a rubber band
+   
+3. HUMAN VULNERABILITY  
+   Example: Employee clicks on fake email link
+   They didn't know it was fake (not enough training)
+   
+   Like: A family member who opens door for strangers
+   
+4. NETWORK VULNERABILITY
+   Example: WiFi using old WEP security (very weak)
+   Anyone can crack it with free tools online!
+   
+   Like: A fence with big holes in it
+
+5. PHYSICAL VULNERABILITY
+   Example: Server room has no lock
+   Anyone can walk in and steal the hard drive!
+   
+   Like: Leaving your door wide open
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="457" data-line-end="458"><a id="Threat_Detailed_457"></a>Threat - Detailed</h2>
+<pre><code class="has-line-data" data-line-start="460" data-line-end="509">THREAT = Something that CAN cause harm
+
+TYPES OF THREATS:
+
+👤 HUMAN THREATS:
+
+   EXTERNAL (Outside the company):
+   • Hackers - Want to steal data or money
+   • Cybercriminals - Organized crime groups
+   • Nation states - Government spy agencies
+   • Competitors - Want your business secrets
+   • Script kiddies - Teenagers using downloaded tools
+   
+   INTERNAL (Inside the company):
+   • Disgruntled employee - Angry worker who wants revenge
+   • Careless employee - Accidentally deletes important files
+   • Contractor - Temporary worker with too much access
+
+🌊 NATURAL THREATS:
+   • Floods - Can destroy servers
+   • Earthquakes - Physical destruction
+   • Fire - Can burn everything
+   • Power cuts - Shuts systems down
+
+💻 TECHNICAL THREATS:
+   • Hardware failure - Hard drive dies
+   • Software bugs - Program crashes and corrupts data
+   • Malware - Viruses, ransomware, spyware
+
+WHO ARE THE ATTACKERS?
+┌─────────────────┬──────────────────┬───────────────────┐
+│   WHO           │   WHY            │   HOW DANGEROUS   │
+├─────────────────┼──────────────────┼───────────────────┤
+│ Nation States   │ Spying, warfare  │ EXTREMELY HIGH    │
+│ (Governments)   │                  │                   │
+├─────────────────┼──────────────────┼───────────────────┤
+│ Cybercriminals  │ Money!           │ VERY HIGH         │
+│                 │                  │                   │
+├─────────────────┼──────────────────┼───────────────────┤
+│ Hacktivists     │ Political reasons│ MEDIUM            │
+│ (e.g. Anonymous)│                  │                   │
+├─────────────────┼──────────────────┼───────────────────┤
+│ Insiders        │ Revenge or money │ HIGH              │
+│ (Your employees)│                  │                   │
+├─────────────────┼──────────────────┼───────────────────┤
+│ Script Kiddies  │ Fun, curiosity   │ LOW-MEDIUM        │
+│ (Teenagers)     │                  │                   │
+└─────────────────┴──────────────────┴───────────────────┘
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="510" data-line-end="511"><a id="Risk_Detailed_510"></a>Risk - Detailed</h2>
+<pre><code class="has-line-data" data-line-start="513" data-line-end="536">RISK = The actual danger you face
+
+SIMPLE FORMULA:
+RISK = THREAT × VULNERABILITY
+
+HIGH THREAT + HIGH VULNERABILITY = HIGH RISK (Danger!)
+HIGH THREAT + LOW VULNERABILITY  = MEDIUM RISK
+LOW THREAT  + HIGH VULNERABILITY = MEDIUM RISK  
+LOW THREAT  + LOW VULNERABILITY  = LOW RISK (Safe!)
+
+PRACTICAL EXAMPLE:
+
+SCENARIO: Your company's customer database
+
+THREAT: Hackers targeting your industry (HIGH)
+VULNERABILITY: No password on database (HIGH)
+RISK = HIGH × HIGH = CRITICAL RISK!
+
+AFTER FIXING VULNERABILITY: Add strong password
+THREAT: Still HIGH (hackers didn't go away)
+VULNERABILITY: Now LOW (strong password added)
+RISK = HIGH × LOW = MEDIUM RISK (much better!)
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="537" data-line-end="538"><a id="Risk_Matrix_Easy_Version_537"></a>Risk Matrix (Easy Version)</h2>
+<pre><code class="has-line-data" data-line-start="540" data-line-end="558">This chart shows risk level based on 
+HOW LIKELY it is + HOW BAD it would be:
+
+                    HOW BAD (IMPACT)
+                 Low    Medium    High
+            ┌────────┬─────────┬────────┐
+HOW   High  │ MEDIUM │  HIGH   │CRITICAL│
+LIKELY      ├────────┼─────────┼────────┤
+(PROB-Medium│  LOW   │ MEDIUM  │  HIGH  │
+ABILITY)    ├────────┼─────────┼────────┤
+       Low  │  LOW   │   LOW   │ MEDIUM │
+            └────────┴─────────┴────────┘
+
+EXAMPLE:
+Power cut = LIKELY (Medium) + Bad for servers (High)
+→ MEDIUM-HIGH risk
+→ Solution: Get a UPS (Uninterruptible Power Supply)
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="559" data-line-end="560"><a id="What_To_Do_About_Risk_559"></a>What To Do About Risk?</h2>
+<pre><code class="has-line-data" data-line-start="562" data-line-end="588">4 OPTIONS (4 T's):
+
+1. TERMINATE (AVOID the risk)
+   Stop doing the risky thing altogether.
+   
+   Example: Stop using USB drives at work
+   (USB drives can bring viruses)
+   
+2. TREAT (REDUCE the risk)
+   Add security to make it safer.
+   
+   Example: Install antivirus software
+   (Still use USB drives but scan them first)
+   
+3. TRANSFER (SHARE the risk)
+   Get insurance or outsource the risk.
+   
+   Example: Buy cyber insurance
+   (If hacked, insurance company helps pay)
+   
+4. TOLERATE (ACCEPT the risk)
+   Sometimes risk is so small, just live with it.
+   
+   Example: Website outage for 1 hour/year
+   (Not worth spending millions to prevent it)
+</code></pre>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="591" data-line-end="592"><a id="PART_6_QUALITY_OF_SERVICE_QoS_591"></a>PART 6: QUALITY OF SERVICE (QoS)</h1>
+<h2 class="code-line has-line-data" data-line-start="593" data-line-end="594"><a id="What_is_QoS_593"></a>What is QoS?</h2>
+<pre><code class="has-line-data" data-line-start="596" data-line-end="606">QoS = How GOOD and RELIABLE a network connection is
+
+SIMPLE ANALOGY:
+Think of your internet connection like a WATER PIPE:
+
+BANDWIDTH = How wide the pipe is (more water = faster internet)
+LATENCY   = How long water takes to travel through pipe
+JITTER    = Does the water flow smoothly or in bursts?
+PACKET LOSS = Does some water spill and never arrive?
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="607" data-line-end="608"><a id="The_4_Main_QoS_Parameters_607"></a>The 4 Main QoS Parameters</h2>
+<h3 class="code-line has-line-data" data-line-start="609" data-line-end="610"><a id="1_Bandwidth_609"></a>1. Bandwidth</h3>
+<pre><code class="has-line-data" data-line-start="612" data-line-end="631">WHAT IS IT?
+Maximum amount of data that can travel through 
+the network at one time.
+
+SIMPLE EXAMPLE:
+Highway with 6 lanes = HIGH bandwidth (many cars)
+Small road with 1 lane = LOW bandwidth (few cars)
+
+MEASURED IN: Mbps (Megabits per second) or Gbps
+
+TYPICAL VALUES:
+Home internet:    10-100 Mbps
+Office internet:  100-1000 Mbps
+Data center:      10+ Gbps
+
+SECURITY IMPACT:
+If bandwidth is FULL → System becomes slow → DoS attack!
+Hackers can flood your network and block real users.
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="632" data-line-end="633"><a id="2_Latency_Delay_632"></a>2. Latency (Delay)</h3>
+<pre><code class="has-line-data" data-line-start="635" data-line-end="667">WHAT IS IT?
+Time it takes for data to travel from 
+source to destination.
+
+SIMPLE EXAMPLE:
+You're playing online game.
+You press FIRE button.
+How long before the game shows you fired?
+That delay = LATENCY
+
+MEASURED IN: milliseconds (ms)
+1000 ms = 1 second
+
+GOOD vs BAD:
+Under 20ms:  EXCELLENT (online gaming, video calls)
+20-100ms:    GOOD (normal browsing, email)
+100-200ms:   OKAY (feeling a bit slow)
+Over 200ms:  BAD (website feels sluggish)
+Over 500ms:  TERRIBLE (everything is frozen!)
+
+SECURITY IMPACT:
+High latency → Security systems respond slowly
+→ Threat detection is delayed
+→ You get attacked but alarm rings too late!
+
+HOW TO TEST:
+Open command prompt and type:
+ping google.com
+
+Example output:
+Reply from 142.250.64.46: time=12ms ← This is latency!
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="668" data-line-end="669"><a id="3_Jitter_668"></a>3. Jitter</h3>
+<pre><code class="has-line-data" data-line-start="671" data-line-end="698">WHAT IS IT?
+How CONSISTENT is the latency?
+(Does it stay stable or keep changing?)
+
+SIMPLE EXAMPLE:
+Imagine you're watching a YouTube video:
+Normal: Data arrives at steady rate → Smooth video
+Jitter: Data arrives in bursts → Video keeps buffering!
+
+ANOTHER EXAMPLE:
+Good connection: 10ms, 11ms, 10ms, 12ms, 10ms
+(Very consistent - small jitter)
+
+Bad connection: 10ms, 150ms, 5ms, 200ms, 8ms
+(All over the place - HIGH JITTER!)
+
+MEASURED IN: milliseconds (ms)
+
+ACCEPTABLE LEVELS:
+Under 30ms: Good (VoIP calls, video calls fine)
+30-50ms:    Okay (slight voice quality issues)
+Over 50ms:  Bad (calls cutting out, echo)
+
+SECURITY IMPACT:
+High jitter → VPN connections become unstable
+→ Security teams can't use remote tools properly
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="699" data-line-end="700"><a id="4_Packet_Loss_699"></a>4. Packet Loss</h3>
+<pre><code class="has-line-data" data-line-start="702" data-line-end="731">WHAT IS IT?
+Some data packets (small chunks of data) 
+get LOST before they arrive.
+
+SIMPLE EXAMPLE:
+Imagine sending a 10-page document in 10 envelopes.
+If 2 envelopes get lost in the mail,
+receiver only gets 8 pages.
+That's 20% PACKET LOSS!
+
+In networks, this is measured as PERCENTAGE.
+
+GOOD vs BAD:
+Under 0.1%: Excellent (barely noticeable)
+0.1-1%:     Good (slight quality decrease)
+1-5%:       Poor (noticeable problems)
+Over 5%:    Terrible (things barely work)
+
+HOW TO TEST WITH PING:
+ping -c 100 google.com
+
+Output will show:
+&quot;100 packets transmitted, 99 received, 1% packet loss&quot;
+
+SECURITY IMPACT:
+Packet loss → Security logs may not be transmitted fully
+→ Attack evidence gets lost
+→ Intrusion detection may miss attacks
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="732" data-line-end="733"><a id="QoS_and_Security_Connection_732"></a>QoS and Security Connection</h2>
+<pre><code class="has-line-data" data-line-start="735" data-line-end="752">HOW QoS RELATES TO SECURITY:
+
+AVAILABILITY (from CIA Triad) = QoS
+
+When QoS is BAD → System becomes UNAVAILABLE
+
+EXAMPLE:
+🔴 DDoS ATTACK (Distributed Denial of Service):
+→ Thousands of computers send fake traffic to your server
+→ Your bandwidth gets FULL
+→ Latency increases dramatically  
+→ Packet loss shoots up
+→ REAL users can't access your website
+→ AVAILABILITY is DESTROYED!
+
+This is why QoS is a SECURITY concern!
+</code></pre>
+<h2 class="code-line has-line-data" data-line-start="753" data-line-end="754"><a id="Simple_QoS_Table_753"></a>Simple QoS Table</h2>
+<pre><code class="has-line-data" data-line-start="756" data-line-end="771">QoS PARAMETER    GOOD VALUE     BAD VALUE     SECURITY RISK
+────────────────────────────────────────────────────────────
+Bandwidth        Lots of free   90%+ used     DoS possible
+                 bandwidth      up            
+
+Latency          Under 100ms    Over 500ms    Slow detection
+
+Jitter           Under 30ms     Over 100ms    Unstable VPN
+
+Packet Loss      Under 0.1%     Over 1%       Missing logs
+
+Availability     99.99%         Less than     System down
+                 (52 min/year   99%           = breach
+                 downtime)                    possible
+</code></pre>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="774" data-line-end="775"><a id="LAB_SESSION_1_SIMPLE_HANDSON_EXERCISES_774"></a>LAB SESSION 1: SIMPLE HANDS-ON EXERCISES</h1>
+<h2 class="code-line has-line-data" data-line-start="776" data-line-end="777"><a id="Lab_1_Install_and_Use_Antivirus_776"></a>Lab 1: Install and Use Antivirus</h2>
+<h3 class="code-line has-line-data" data-line-start="778" data-line-end="779"><a id="What_is_Antivirus_778"></a>What is Antivirus?</h3>
+<pre><code class="has-line-data" data-line-start="781" data-line-end="800">ANTIVIRUS = Security guard for your computer
+
+HOW IT WORKS (SIMPLE):
+
+STEP 1: Antivirus has a DATABASE of known viruses
+        (Like a criminal database with photos)
+
+STEP 2: Every file that enters your computer
+        is SCANNED and compared to database
+
+STEP 3: If file matches a known virus → BLOCKED!
+        If file looks suspicious → WARNING!
+        If file is clean → ALLOWED!
+
+TYPES OF DETECTION:
+1. Signature-based: &quot;I recognize this criminal's face!&quot;
+2. Behavior-based: &quot;This person is acting suspiciously!&quot;
+3. AI/Machine Learning: &quot;Based on patterns, this looks bad!&quot;
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="801" data-line-end="802"><a id="Installing_ClamAV_on_Linux_Step_by_Step_801"></a>Installing ClamAV on Linux (Step by Step)</h3>
+<pre><code class="has-line-data language-bash" data-line-start="804" data-line-end="831"><span class="hljs-comment"># Step 1: Open Terminal</span>
+<span class="hljs-comment"># (Right click on desktop → Open Terminal)</span>
+
+<span class="hljs-comment"># Step 2: Update your system first</span>
+<span class="hljs-built_in">sudo</span> apt update
+<span class="hljs-comment"># (This refreshes the list of available software)</span>
+<span class="hljs-comment"># Type your password when asked</span>
+
+<span class="hljs-comment"># Step 3: Install ClamAV</span>
+<span class="hljs-built_in">sudo</span> apt install clamav -y
+<span class="hljs-comment"># (The -y means &quot;yes&quot; to all questions automatically)</span>
+
+<span class="hljs-comment"># Step 4: Wait for installation to finish</span>
+<span class="hljs-comment"># You&#x27;ll see lots of text scrolling - that&#x27;s normal!</span>
+
+<span class="hljs-comment"># Step 5: Update the virus database</span>
+<span class="hljs-comment"># (ClamAV needs to download latest virus definitions)</span>
+<span class="hljs-built_in">sudo</span> freshclam
+<span class="hljs-comment"># This downloads information about all known viruses</span>
+<span class="hljs-comment"># May take 5-10 minutes</span>
+
+<span class="hljs-comment"># Step 6: Check it&#x27;s working</span>
+clamscan --version
+<span class="hljs-comment"># Should show: ClamAV 0.103.x</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;ClamAV installed successfully!&quot;</span>
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="832" data-line-end="833"><a id="Scanning_Your_Computer_832"></a>Scanning Your Computer</h3>
+<pre><code class="has-line-data language-bash" data-line-start="835" data-line-end="863"><span class="hljs-comment"># ================================================</span>
+<span class="hljs-comment"># BASIC SCANNING - Easy Commands</span>
+<span class="hljs-comment"># ================================================</span>
+
+<span class="hljs-comment"># Scan ONE specific file</span>
+clamscan /home/student/downloads/file.pdf
+<span class="hljs-comment"># Output: /home/student/downloads/file.pdf: OK</span>
+<span class="hljs-comment"># OR: /home/student/downloads/file.pdf: VIRUS FOUND</span>
+
+<span class="hljs-comment"># Scan a FOLDER (and all files inside)</span>
+clamscan -r /home/student/Downloads/
+<span class="hljs-comment"># -r means &quot;recursive&quot; = look inside all subfolders too</span>
+
+<span class="hljs-comment"># Scan with more information shown</span>
+clamscan -v /home/student/
+<span class="hljs-comment"># -v means &quot;verbose&quot; = show all details</span>
+
+<span class="hljs-comment"># Scan and save results to a file</span>
+clamscan -r /home/ --<span class="hljs-built_in">log</span>=/home/student/scan_results.txt
+<span class="hljs-comment"># Now you can open scan_results.txt to see what was found</span>
+
+<span class="hljs-comment"># Quick scan of common locations</span>
+clamscan -r /tmp/ /home/ /var/tmp/
+
+<span class="hljs-comment"># Show ONLY infected files (cleaner output)</span>
+clamscan -r /home/ --infected
+<span class="hljs-comment"># --infected = only show files with viruses</span>
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="864" data-line-end="865"><a id="Understanding_Scan_Output_864"></a>Understanding Scan Output</h3>
+<pre><code class="has-line-data" data-line-start="867" data-line-end="887">WHAT THE OUTPUT MEANS:
+
+GOOD OUTPUT (Clean file):
+/home/student/document.pdf: OK
+← &quot;OK&quot; means NO virus found!
+
+BAD OUTPUT (Virus found!):
+/home/student/evil.exe: Trojan.Generic-123 FOUND
+← &quot;FOUND&quot; means VIRUS DETECTED!
+
+SUMMARY AT THE END:
+----------- SCAN SUMMARY -----------
+Known viruses: 8632454        ← Viruses in database
+Engine version: 0.103.8       ← ClamAV version
+Scanned directories: 15       ← Folders checked
+Scanned files: 247            ← Files checked
+Infected files: 2             ← Files with virus!
+Data scanned: 145.30 MB       ← Amount of data checked
+Time: 45.321 sec (0 m 45 s)   ← How long it took
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="888" data-line-end="889"><a id="Testing_Antivirus_Safe_Test_888"></a>Testing Antivirus (Safe Test)</h3>
+<pre><code class="has-line-data language-bash" data-line-start="891" data-line-end="916"><span class="hljs-comment"># EICAR Test - A SAFE fake virus to test antivirus</span>
+<span class="hljs-comment"># This is NOT a real virus - it&#x27;s just for testing!</span>
+
+<span class="hljs-comment"># Create the EICAR test file</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*&#x27;</span> \
+  &gt; /tmp/test_virus.com
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Test file created at /tmp/test_virus.com&quot;</span>
+
+<span class="hljs-comment"># Now scan it - antivirus SHOULD detect it!</span>
+clamscan /tmp/test_virus.com
+
+<span class="hljs-comment"># EXPECTED OUTPUT:</span>
+<span class="hljs-comment"># /tmp/test_virus.com: Eicar-Test-Signature FOUND</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># If you see &quot;FOUND&quot; → Your antivirus is WORKING!</span>
+<span class="hljs-comment"># If you see &quot;OK&quot; → Something is wrong with antivirus</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;If &#x27;FOUND&#x27; appeared above, your antivirus works!&quot;</span>
+
+<span class="hljs-comment"># Clean up test file</span>
+<span class="hljs-built_in">rm</span> /tmp/test_virus.com
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Test file deleted.&quot;</span>
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="917" data-line-end="918"><a id="Simple_Scan_Script_for_Beginners_917"></a>Simple Scan Script for Beginners</h3>
+<pre><code class="has-line-data language-bash" data-line-start="920" data-line-end="980"><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># my_scan.sh - Simple antivirus scan script</span>
+<span class="hljs-comment"># How to run: bash my_scan.sh</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;===============================&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;  MY ANTIVIRUS SCAN PROGRAM   &quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;===============================&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&quot;</span>
+
+<span class="hljs-comment"># Ask user what to scan</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;What do you want to scan?&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;1. Just my Downloads folder&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;2. My entire home folder&quot;</span>  
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;3. The whole computer (takes long!)&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;Enter your choice (1, 2, or 3): &quot;</span>
+<span class="hljs-built_in">read</span> choice
+
+<span class="hljs-comment"># Set the folder based on choice</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$choice</span>&quot;</span> = <span class="hljs-string">&quot;1&quot;</span> ]; <span class="hljs-keyword">then</span>
+    SCAN_FOLDER=<span class="hljs-string">&quot;/home/<span class="hljs-variable">$USER</span>/Downloads&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Scanning Downloads folder...&quot;</span>
+    
+<span class="hljs-keyword">elif</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$choice</span>&quot;</span> = <span class="hljs-string">&quot;2&quot;</span> ]; <span class="hljs-keyword">then</span>
+    SCAN_FOLDER=<span class="hljs-string">&quot;/home/<span class="hljs-variable">$USER</span>&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Scanning home folder...&quot;</span>
+    
+<span class="hljs-keyword">elif</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$choice</span>&quot;</span> = <span class="hljs-string">&quot;3&quot;</span> ]; <span class="hljs-keyword">then</span>
+    SCAN_FOLDER=<span class="hljs-string">&quot;/&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Scanning entire computer (this will take a while!)&quot;</span>
+    
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Invalid choice! Scanning Downloads by default.&quot;</span>
+    SCAN_FOLDER=<span class="hljs-string">&quot;/home/<span class="hljs-variable">$USER</span>/Downloads&quot;</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Starting scan of: <span class="hljs-variable">$SCAN_FOLDER</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Please wait...&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&quot;</span>
+
+<span class="hljs-comment"># Run the scan</span>
+clamscan -r <span class="hljs-string">&quot;<span class="hljs-variable">$SCAN_FOLDER</span>&quot;</span> --infected --<span class="hljs-built_in">log</span>=<span class="hljs-string">&quot;/tmp/my_scan_result.txt&quot;</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;===============================&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;  SCAN COMPLETE!              &quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;===============================&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Results saved to: /tmp/my_scan_result.txt&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&quot;</span>
+
+<span class="hljs-comment"># Show if any viruses found</span>
+<span class="hljs-keyword">if</span> grep -q <span class="hljs-string">&quot;FOUND&quot;</span> /tmp/my_scan_result.txt; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;⚠️  WARNING: Viruses were found!&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Check /tmp/my_scan_result.txt for details&quot;</span>
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;✅ CLEAN! No viruses found.&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="983" data-line-end="984"><a id="Lab_2_Look_at_OWASP_Security_Statistics_983"></a>Lab 2: Look at OWASP Security Statistics</h2>
+<h3 class="code-line has-line-data" data-line-start="985" data-line-end="986"><a id="Simple_Python_Script_to_Show_OWASP_Data_985"></a>Simple Python Script to Show OWASP Data</h3>
+<pre><code class="has-line-data language-python" data-line-start="988" data-line-end="1184"><span class="hljs-comment">#!/usr/bin/env python3</span>
+<span class="hljs-comment"># owasp_simple.py</span>
+<span class="hljs-comment"># Simple script to show OWASP Top 10 information</span>
+<span class="hljs-comment"># How to run: python3 owasp_simple.py</span>
+
+<span class="hljs-comment"># OWASP Top 10 data stored in a simple list</span>
+owasp_top10 = [
+    {
+        <span class="hljs-string">&quot;rank&quot;</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Broken Access Control&quot;</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;People can access areas they shouldn&#x27;t&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;A student can view OTHER students&#x27; marks&quot;</span>,
+        <span class="hljs-string">&quot;how_common&quot;</span>: <span class="hljs-number">94</span>,
+        <span class="hljs-string">&quot;how_to_fix&quot;</span>: <span class="hljs-string">&quot;Check permissions before showing any data&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;rank&quot;</span>: <span class="hljs-number">2</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Cryptographic Failures&quot;</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Passwords stored without proper protection&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Website stores passwords as plain text (visible to hackers)&quot;</span>,
+        <span class="hljs-string">&quot;how_common&quot;</span>: <span class="hljs-number">83</span>,
+        <span class="hljs-string">&quot;how_to_fix&quot;</span>: <span class="hljs-string">&quot;Always encrypt/hash passwords before storing&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;rank&quot;</span>: <span class="hljs-number">3</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Injection Attacks&quot;</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Hackers type evil commands in input boxes&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Typing SQL code in login box to bypass password&quot;</span>,
+        <span class="hljs-string">&quot;how_common&quot;</span>: <span class="hljs-number">94</span>,
+        <span class="hljs-string">&quot;how_to_fix&quot;</span>: <span class="hljs-string">&quot;Never trust user input, always clean/validate it&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;rank&quot;</span>: <span class="hljs-number">4</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Insecure Design&quot;</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Security not planned from the beginning&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Website has no limit on login attempts (easy brute force)&quot;</span>,
+        <span class="hljs-string">&quot;how_common&quot;</span>: <span class="hljs-number">75</span>,
+        <span class="hljs-string">&quot;how_to_fix&quot;</span>: <span class="hljs-string">&quot;Think about security BEFORE building, not after&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;rank&quot;</span>: <span class="hljs-number">5</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Security Misconfiguration&quot;</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Wrong settings that create security holes&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Admin panel accessible with default password &#x27;admin/admin&#x27;&quot;</span>,
+        <span class="hljs-string">&quot;how_common&quot;</span>: <span class="hljs-number">90</span>,
+        <span class="hljs-string">&quot;how_to_fix&quot;</span>: <span class="hljs-string">&quot;Change all default settings, remove unused features&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;rank&quot;</span>: <span class="hljs-number">6</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Vulnerable Components&quot;</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Using old software with known security problems&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Website using WordPress from 3 years ago (many known bugs)&quot;</span>,
+        <span class="hljs-string">&quot;how_common&quot;</span>: <span class="hljs-number">91</span>,
+        <span class="hljs-string">&quot;how_to_fix&quot;</span>: <span class="hljs-string">&quot;Keep all software updated to latest version&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;rank&quot;</span>: <span class="hljs-number">7</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Authentication Failures&quot;</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Weak login security&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;No limit on password attempts (can guess forever)&quot;</span>,
+        <span class="hljs-string">&quot;how_common&quot;</span>: <span class="hljs-number">80</span>,
+        <span class="hljs-string">&quot;how_to_fix&quot;</span>: <span class="hljs-string">&quot;Use strong passwords, MFA (OTP), lock after failed attempts&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;rank&quot;</span>: <span class="hljs-number">8</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Software Integrity Failures&quot;</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Using software/plugins without verifying they are genuine&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Installing app from unknown website (could be fake with virus)&quot;</span>,
+        <span class="hljs-string">&quot;how_common&quot;</span>: <span class="hljs-number">75</span>,
+        <span class="hljs-string">&quot;how_to_fix&quot;</span>: <span class="hljs-string">&quot;Only use software from official sources, verify signatures&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;rank&quot;</span>: <span class="hljs-number">9</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Security Logging Failures&quot;</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Not keeping records of what happens&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Hacker breaks in, but no logs exist to know what they did&quot;</span>,
+        <span class="hljs-string">&quot;how_common&quot;</span>: <span class="hljs-number">85</span>,
+        <span class="hljs-string">&quot;how_to_fix&quot;</span>: <span class="hljs-string">&quot;Keep logs of all logins, errors, and important actions&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;rank&quot;</span>: <span class="hljs-number">10</span>,
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Server-Side Request Forgery&quot;</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Tricking server to fetch content from wrong places&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Hacker makes server read internal files it shouldn&#x27;t share&quot;</span>,
+        <span class="hljs-string">&quot;how_common&quot;</span>: <span class="hljs-number">70</span>,
+        <span class="hljs-string">&quot;how_to_fix&quot;</span>: <span class="hljs-string">&quot;Validate all URLs, block access to internal resources&quot;</span>
+    }
+]
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">show_menu</span>():
+    <span class="hljs-string">&quot;&quot;&quot;Show main menu.&quot;&quot;&quot;</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span> + <span class="hljs-string">&quot;=&quot;</span> * <span class="hljs-number">55</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;     OWASP TOP 10 - BEGINNER&#x27;S GUIDE&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span> * <span class="hljs-number">55</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;1. Show all OWASP Top 10 (quick summary)&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;2. Show details of one vulnerability&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;3. Show which are most common&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;4. Exit&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span> * <span class="hljs-number">55</span>)
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">show_all_quick</span>():
+    <span class="hljs-string">&quot;&quot;&quot;Show quick summary of all vulnerabilities.&quot;&quot;&quot;</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span> + <span class="hljs-string">&quot;=&quot;</span> * <span class="hljs-number">55</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  OWASP TOP 10 - QUICK SUMMARY&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span> * <span class="hljs-number">55</span>)
+    
+    <span class="hljs-keyword">for</span> vuln <span class="hljs-keyword">in</span> owasp_top10:
+        <span class="hljs-comment"># Create a bar showing how common it is</span>
+        bar_length = vuln[<span class="hljs-string">&quot;how_common&quot;</span>] // <span class="hljs-number">10</span>
+        bar = <span class="hljs-string">&quot;█&quot;</span> * bar_length
+        
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  #<span class="hljs-subst">{vuln[<span class="hljs-string">&#x27;rank&#x27;</span>]}</span> <span class="hljs-subst">{vuln[<span class="hljs-string">&#x27;name&#x27;</span>]}</span>&quot;</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  How common: <span class="hljs-subst">{bar}</span> <span class="hljs-subst">{vuln[<span class="hljs-string">&#x27;how_common&#x27;</span>]}</span>% of websites!&quot;</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Simple meaning: <span class="hljs-subst">{vuln[<span class="hljs-string">&#x27;simple_explanation&#x27;</span>]}</span>&quot;</span>)
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">show_one_detail</span>():
+    <span class="hljs-string">&quot;&quot;&quot;Show detailed info about one vulnerability.&quot;&quot;&quot;</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nEnter rank number (1-10): &quot;</span>, end=<span class="hljs-string">&quot;&quot;</span>)
+    
+    <span class="hljs-keyword">try</span>:
+        rank = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>())
+        
+        <span class="hljs-comment"># Find the vulnerability</span>
+        found = <span class="hljs-literal">None</span>
+        <span class="hljs-keyword">for</span> vuln <span class="hljs-keyword">in</span> owasp_top10:
+            <span class="hljs-keyword">if</span> vuln[<span class="hljs-string">&quot;rank&quot;</span>] == rank:
+                found = vuln
+                <span class="hljs-keyword">break</span>
+        
+        <span class="hljs-keyword">if</span> found:
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span> + <span class="hljs-string">&quot;=&quot;</span> * <span class="hljs-number">55</span>)
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  #<span class="hljs-subst">{found[<span class="hljs-string">&#x27;rank&#x27;</span>]}</span>: <span class="hljs-subst">{found[<span class="hljs-string">&#x27;name&#x27;</span>]}</span>&quot;</span>)
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span> * <span class="hljs-number">55</span>)
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  WHAT IS IT?&quot;</span>)
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{found[<span class="hljs-string">&#x27;simple_explanation&#x27;</span>]}</span>&quot;</span>)
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  REAL LIFE EXAMPLE:&quot;</span>)
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{found[<span class="hljs-string">&#x27;real_example&#x27;</span>]}</span>&quot;</span>)
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  HOW COMMON IS IT?&quot;</span>)
+            bar = <span class="hljs-string">&quot;█&quot;</span> * (found[<span class="hljs-string">&#x27;how_common&#x27;</span>] // <span class="hljs-number">5</span>)
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{bar}</span> <span class="hljs-subst">{found[<span class="hljs-string">&#x27;how_common&#x27;</span>]}</span>% of websites have this problem!&quot;</span>)
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  HOW TO FIX IT:&quot;</span>)
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ✓ <span class="hljs-subst">{found[<span class="hljs-string">&#x27;how_to_fix&#x27;</span>]}</span>&quot;</span>)
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Invalid rank! Enter 1-10.&quot;</span>)
+            
+    <span class="hljs-keyword">except</span> ValueError:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Please enter a number!&quot;</span>)
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">show_most_common</span>():
+    <span class="hljs-string">&quot;&quot;&quot;Show vulnerabilities sorted by how common they are.&quot;&quot;&quot;</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span> + <span class="hljs-string">&quot;=&quot;</span> * <span class="hljs-number">55</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  RANKED BY HOW COMMON THEY ARE&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span> * <span class="hljs-number">55</span>)
+    
+    <span class="hljs-comment"># Sort by prevalence (most common first)</span>
+    sorted_vulns = <span class="hljs-built_in">sorted</span>(owasp_top10, 
+                          key=<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-string">&quot;how_common&quot;</span>], 
+                          reverse=<span class="hljs-literal">True</span>)
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  <span class="hljs-subst">{<span class="hljs-string">&#x27;Rank&#x27;</span>:&lt;<span class="hljs-number">6</span>}</span> <span class="hljs-subst">{<span class="hljs-string">&#x27;Vulnerability&#x27;</span>:&lt;<span class="hljs-number">35</span>}</span> <span class="hljs-subst">{<span class="hljs-string">&#x27;Websites Affected&#x27;</span>}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  &quot;</span> + <span class="hljs-string">&quot;-&quot;</span> * <span class="hljs-number">55</span>)
+    
+    <span class="hljs-keyword">for</span> i, vuln <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(sorted_vulns, <span class="hljs-number">1</span>):
+        bar = <span class="hljs-string">&quot;█&quot;</span> * (vuln[<span class="hljs-string">&quot;how_common&quot;</span>] // <span class="hljs-number">10</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{i:&lt;<span class="hljs-number">6</span>}</span> <span class="hljs-subst">{vuln[<span class="hljs-string">&#x27;name&#x27;</span>]:&lt;<span class="hljs-number">35</span>}</span> <span class="hljs-subst">{vuln[<span class="hljs-string">&#x27;how_common&#x27;</span>]}</span>%&quot;</span>)
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n  CONCLUSION:&quot;</span>)
+    avg = <span class="hljs-built_in">sum</span>(v[<span class="hljs-string">&quot;how_common&quot;</span>] <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> owasp_top10) // <span class="hljs-built_in">len</span>(owasp_top10)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Average: <span class="hljs-subst">{avg}</span>% of websites have OWASP vulnerabilities!&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  This means most websites have security problems!&quot;</span>)
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():
+    <span class="hljs-string">&quot;&quot;&quot;Main program loop.&quot;&quot;&quot;</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nWelcome to the OWASP Learning Tool!&quot;</span>)
+    
+    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+        show_menu()
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Enter your choice: &quot;</span>, end=<span class="hljs-string">&quot;&quot;</span>)
+        
+        choice = <span class="hljs-built_in">input</span>().strip()
+        
+        <span class="hljs-keyword">if</span> choice == <span class="hljs-string">&quot;1&quot;</span>:
+            show_all_quick()
+        <span class="hljs-keyword">elif</span> choice == <span class="hljs-string">&quot;2&quot;</span>:
+            show_one_detail()
+        <span class="hljs-keyword">elif</span> choice == <span class="hljs-string">&quot;3&quot;</span>:
+            show_most_common()
+        <span class="hljs-keyword">elif</span> choice == <span class="hljs-string">&quot;4&quot;</span>:
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nGoodbye! Keep learning about security!&quot;</span>)
+            <span class="hljs-keyword">break</span>
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Invalid choice! Please enter 1, 2, 3, or 4&quot;</span>)
+
+<span class="hljs-comment"># Run the program</span>
+main()
+</code></pre>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="1187" data-line-end="1188"><a id="Lab_3_Simple_Vulnerability_Scan_with_OpenVAS_1187"></a>Lab 3: Simple Vulnerability Scan with OpenVAS</h2>
+<h3 class="code-line has-line-data" data-line-start="1189" data-line-end="1190"><a id="What_is_OpenVAS_1189"></a>What is OpenVAS?</h3>
+<pre><code class="has-line-data" data-line-start="1192" data-line-end="1210">OPENVAS = Automatic Security Inspector
+
+WHAT IT DOES:
+Imagine a security expert who:
+1. Knocks on every door of your house (checks every port)
+2. Tests every window and lock (checks all services)
+3. Checks if your locks are old/weak (checks for vulnerabilities)
+4. Makes a report of all problems found
+
+OpenVAS does this for your COMPUTER NETWORK automatically!
+
+WHAT IT FINDS:
+✓ Unpatched/outdated software
+✓ Weak passwords on services
+✓ Open ports that shouldn't be open
+✓ Old/weak encryption being used
+✓ Misconfigured settings
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="1211" data-line-end="1212"><a id="Installing_OpenVAS_Kali_Linux_1211"></a>Installing OpenVAS (Kali Linux)</h3>
+<pre><code class="has-line-data language-bash" data-line-start="1214" data-line-end="1243"><span class="hljs-comment"># Step 1: Update Kali Linux first</span>
+<span class="hljs-built_in">sudo</span> apt update
+
+<span class="hljs-comment"># Step 2: Install OpenVAS</span>
+<span class="hljs-built_in">sudo</span> apt install gvm -y
+<span class="hljs-comment"># gvm = Greenbone Vulnerability Manager (new name for OpenVAS)</span>
+
+<span class="hljs-comment"># Step 3: Set up OpenVAS (downloads virus/vulnerability database)</span>
+<span class="hljs-comment"># WARNING: This takes 30-60 minutes! </span>
+<span class="hljs-comment"># It needs to download a huge database of known vulnerabilities</span>
+<span class="hljs-built_in">sudo</span> gvm-setup
+
+<span class="hljs-comment"># You&#x27;ll see your password at the end like:</span>
+<span class="hljs-comment"># ✔ GVM setup completed. </span>
+<span class="hljs-comment"># ✔ Admin username: admin</span>
+<span class="hljs-comment"># ✔ Admin password: abc123xyz</span>
+<span class="hljs-comment"># SAVE THIS PASSWORD!</span>
+
+<span class="hljs-comment"># Step 4: Start OpenVAS</span>
+<span class="hljs-built_in">sudo</span> gvm-start
+
+<span class="hljs-comment"># Step 5: Open in web browser</span>
+<span class="hljs-comment"># Go to: https://localhost:9392</span>
+<span class="hljs-comment"># Username: admin</span>
+<span class="hljs-comment"># Password: (the one shown during setup)</span>
+
+<span class="hljs-comment"># Step 6: If you forgot password</span>
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cat</span> /etc/gvm/openvasmd.pass
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="1244" data-line-end="1245"><a id="How_to_Run_a_Scan_Using_Web_Interface_1244"></a>How to Run a Scan (Using Web Interface)</h3>
+<pre><code class="has-line-data" data-line-start="1247" data-line-end="1274">STEP-BY-STEP IN WEB BROWSER:
+
+STEP 1: Login to https://localhost:9392
+        Username: admin, Password: (from setup)
+
+STEP 2: Go to &quot;Scans&quot; menu → Click &quot;Tasks&quot;
+
+STEP 3: Click the STAR icon (Create new task)
+
+STEP 4: Fill in the form:
+        Name: &quot;My First Scan&quot;
+        Target: (type IP address to scan, e.g., 192.168.1.1)
+        Scan Config: &quot;Full and fast&quot; (recommended for beginners)
+
+STEP 5: Click &quot;Save&quot; then click the PLAY button ▶
+
+STEP 6: Wait for scan to finish (30 min to 2 hours)
+
+STEP 7: Click on scan result to see vulnerabilities found!
+
+UNDERSTANDING RESULTS:
+🔴 Critical = Fix IMMEDIATELY (very dangerous)
+🟠 High     = Fix within 1 week
+🟡 Medium   = Fix within 1 month  
+🔵 Low      = Fix when possible
+⚪ Log      = Just information, not dangerous
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="1275" data-line-end="1276"><a id="Simple_Python_Script_to_Understand_Scan_Results_1275"></a>Simple Python Script to Understand Scan Results</h3>
+<pre><code class="has-line-data language-python" data-line-start="1278" data-line-end="1420"><span class="hljs-comment">#!/usr/bin/env python3</span>
+<span class="hljs-comment"># understand_vulnerabilities.py</span>
+<span class="hljs-comment"># Helps beginners understand common vulnerabilities</span>
+
+vulnerabilities = [
+    {
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Default Password&quot;</span>,
+        <span class="hljs-string">&quot;severity&quot;</span>: <span class="hljs-string">&quot;Critical&quot;</span>,
+        <span class="hljs-string">&quot;cvss_score&quot;</span>: <span class="hljs-number">9.8</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Device/software still has factory password&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Router with password &#x27;admin&#x27; or &#x27;123456&#x27;&quot;</span>,
+        <span class="hljs-string">&quot;why_dangerous&quot;</span>: <span class="hljs-string">&quot;Hackers try these passwords first! Very easy to break in.&quot;</span>,
+        <span class="hljs-string">&quot;fix&quot;</span>: <span class="hljs-string">&quot;Change password immediately to something strong and unique&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Unpatched Windows (Old Version)&quot;</span>,
+        <span class="hljs-string">&quot;severity&quot;</span>: <span class="hljs-string">&quot;High&quot;</span>,
+        <span class="hljs-string">&quot;cvss_score&quot;</span>: <span class="hljs-number">8.1</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Windows hasn&#x27;t received security updates&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Windows 7 without updates - WannaCry ransomware hit these!&quot;</span>,
+        <span class="hljs-string">&quot;why_dangerous&quot;</span>: <span class="hljs-string">&quot;Known security holes exist, hackers know exactly how to exploit them&quot;</span>,
+        <span class="hljs-string">&quot;fix&quot;</span>: <span class="hljs-string">&quot;Enable automatic updates, install all pending updates NOW&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Open Telnet Port&quot;</span>,
+        <span class="hljs-string">&quot;severity&quot;</span>: <span class="hljs-string">&quot;High&quot;</span>,
+        <span class="hljs-string">&quot;cvss_score&quot;</span>: <span class="hljs-number">7.5</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Telnet sends passwords without encryption&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Login via Telnet - your password travels as plain text on network&quot;</span>,
+        <span class="hljs-string">&quot;why_dangerous&quot;</span>: <span class="hljs-string">&quot;Anyone on same network can see your username and password!&quot;</span>,
+        <span class="hljs-string">&quot;fix&quot;</span>: <span class="hljs-string">&quot;Disable Telnet, use SSH instead (SSH is encrypted)&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Self-Signed SSL Certificate&quot;</span>,
+        <span class="hljs-string">&quot;severity&quot;</span>: <span class="hljs-string">&quot;Medium&quot;</span>,
+        <span class="hljs-string">&quot;cvss_score&quot;</span>: <span class="hljs-number">5.0</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Website security certificate is not from trusted authority&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Browser shows &#x27;Your connection is not private&#x27; warning&quot;</span>,
+        <span class="hljs-string">&quot;why_dangerous&quot;</span>: <span class="hljs-string">&quot;Could be fake website, users might ignore warnings&quot;</span>,
+        <span class="hljs-string">&quot;fix&quot;</span>: <span class="hljs-string">&quot;Get a proper SSL certificate from trusted authority (free via Let&#x27;s Encrypt)&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Directory Listing Enabled&quot;</span>,
+        <span class="hljs-string">&quot;severity&quot;</span>: <span class="hljs-string">&quot;Medium&quot;</span>,
+        <span class="hljs-string">&quot;cvss_score&quot;</span>: <span class="hljs-number">4.3</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Website shows all its files like an open folder&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Go to website.com/uploads/ - see ALL uploaded files!&quot;</span>,
+        <span class="hljs-string">&quot;why_dangerous&quot;</span>: <span class="hljs-string">&quot;Hackers can see all your files, find sensitive data&quot;</span>,
+        <span class="hljs-string">&quot;fix&quot;</span>: <span class="hljs-string">&quot;Disable directory listing in web server settings&quot;</span>
+    },
+    {
+        <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Outdated Apache Web Server&quot;</span>,
+        <span class="hljs-string">&quot;severity&quot;</span>: <span class="hljs-string">&quot;Medium&quot;</span>,
+        <span class="hljs-string">&quot;cvss_score&quot;</span>: <span class="hljs-number">5.3</span>,
+        <span class="hljs-string">&quot;simple_explanation&quot;</span>: <span class="hljs-string">&quot;Web server software is old version with known bugs&quot;</span>,
+        <span class="hljs-string">&quot;real_example&quot;</span>: <span class="hljs-string">&quot;Apache 2.2 instead of Apache 2.4 - old version has known vulnerabilities&quot;</span>,
+        <span class="hljs-string">&quot;why_dangerous&quot;</span>: <span class="hljs-string">&quot;Attackers know the exact weaknesses of old versions&quot;</span>,
+        <span class="hljs-string">&quot;fix&quot;</span>: <span class="hljs-string">&quot;Upgrade Apache to latest stable version&quot;</span>
+    }
+]
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">show_vulnerability</span>(<span class="hljs-params">vuln</span>):
+    <span class="hljs-string">&quot;&quot;&quot;Display one vulnerability in easy-to-understand format.&quot;&quot;&quot;</span>
+    
+    <span class="hljs-comment"># Color-code by severity (using text symbols since terminal may not support colors)</span>
+    severity_symbols = {
+        <span class="hljs-string">&quot;Critical&quot;</span>: <span class="hljs-string">&quot;🔴 CRITICAL&quot;</span>,
+        <span class="hljs-string">&quot;High&quot;</span>: <span class="hljs-string">&quot;🟠 HIGH&quot;</span>,
+        <span class="hljs-string">&quot;Medium&quot;</span>: <span class="hljs-string">&quot;🟡 MEDIUM&quot;</span>,
+        <span class="hljs-string">&quot;Low&quot;</span>: <span class="hljs-string">&quot;🔵 LOW&quot;</span>
+    }
+    
+    symbol = severity_symbols.get(vuln[<span class="hljs-string">&quot;severity&quot;</span>], <span class="hljs-string">&quot;⚪&quot;</span>)
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  <span class="hljs-subst">{<span class="hljs-string">&#x27;=&#x27;</span>*<span class="hljs-number">55</span>}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{symbol}</span>: <span class="hljs-subst">{vuln[<span class="hljs-string">&#x27;name&#x27;</span>]}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{<span class="hljs-string">&#x27;=&#x27;</span>*<span class="hljs-number">55</span>}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  CVSS Score: <span class="hljs-subst">{vuln[<span class="hljs-string">&#x27;cvss_score&#x27;</span>]}</span>/10&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  WHAT IS IT?&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{vuln[<span class="hljs-string">&#x27;simple_explanation&#x27;</span>]}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  REAL EXAMPLE:&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{vuln[<span class="hljs-string">&#x27;real_example&#x27;</span>]}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  WHY IS IT DANGEROUS?&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{vuln[<span class="hljs-string">&#x27;why_dangerous&#x27;</span>]}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  HOW TO FIX:&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ✓ <span class="hljs-subst">{vuln[<span class="hljs-string">&#x27;fix&#x27;</span>]}</span>&quot;</span>)
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">show_summary</span>():
+    <span class="hljs-string">&quot;&quot;&quot;Show summary of all vulnerabilities.&quot;&quot;&quot;</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span> + <span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">55</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  VULNERABILITY SCAN RESULTS - SUMMARY&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">55</span>)
+    
+    <span class="hljs-comment"># Count by severity</span>
+    counts = {}
+    <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> vulnerabilities:
+        severity = v[<span class="hljs-string">&quot;severity&quot;</span>]
+        counts[severity] = counts.get(severity, <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  Total vulnerabilities found: <span class="hljs-subst">{<span class="hljs-built_in">len</span>(vulnerabilities)}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>()
+    
+    <span class="hljs-keyword">for</span> severity <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;Critical&quot;</span>, <span class="hljs-string">&quot;High&quot;</span>, <span class="hljs-string">&quot;Medium&quot;</span>, <span class="hljs-string">&quot;Low&quot;</span>]:
+        count = counts.get(severity, <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">if</span> count &gt; <span class="hljs-number">0</span>:
+            symbols = severity_symbols = {
+                <span class="hljs-string">&quot;Critical&quot;</span>: <span class="hljs-string">&quot;🔴&quot;</span>,
+                <span class="hljs-string">&quot;High&quot;</span>: <span class="hljs-string">&quot;🟠&quot;</span>,
+                <span class="hljs-string">&quot;Medium&quot;</span>: <span class="hljs-string">&quot;🟡&quot;</span>,
+                <span class="hljs-string">&quot;Low&quot;</span>: <span class="hljs-string">&quot;🔵&quot;</span>
+            }
+            sym = symbols.get(severity, <span class="hljs-string">&quot;⚪&quot;</span>)
+            bar = <span class="hljs-string">&quot;!&quot;</span> * count
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{sym}</span> <span class="hljs-subst">{severity:&lt;<span class="hljs-number">10</span>}</span>: <span class="hljs-subst">{count}</span> found  [<span class="hljs-subst">{bar}</span>]&quot;</span>)
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n  ACTION PLAN:&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  1. Fix CRITICAL issues today!&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  2. Fix HIGH issues this week&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  3. Fix MEDIUM issues this month&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  4. Plan LOW fixes for next maintenance window&quot;</span>)
+
+<span class="hljs-comment"># Main program</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span> * <span class="hljs-number">55</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  VULNERABILITY SCANNER RESULTS EXPLAINED&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  (Simple version for beginners)&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span> * <span class="hljs-number">55</span>)
+
+show_summary()
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n\nPress ENTER to see each vulnerability in detail...&quot;</span>)
+<span class="hljs-built_in">input</span>()
+
+<span class="hljs-keyword">for</span> i, vuln <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(vulnerabilities, <span class="hljs-number">1</span>):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  Showing vulnerability <span class="hljs-subst">{i}</span> of <span class="hljs-subst">{<span class="hljs-built_in">len</span>(vulnerabilities)}</span>&quot;</span>)
+    show_vulnerability(vuln)
+    
+    <span class="hljs-keyword">if</span> i &lt; <span class="hljs-built_in">len</span>(vulnerabilities):
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n  Press ENTER for next vulnerability...&quot;</span>)
+        <span class="hljs-built_in">input</span>()
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n\n  DONE! Remember: Always fix Critical and High first!&quot;</span>)
+</code></pre>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="1423" data-line-end="1424"><a id="Lab_4_Network_Traffic_Analysis_with_Wireshark_1423"></a>Lab 4: Network Traffic Analysis with Wireshark</h2>
+<h3 class="code-line has-line-data" data-line-start="1425" data-line-end="1426"><a id="What_is_Wireshark_1425"></a>What is Wireshark?</h3>
+<pre><code class="has-line-data" data-line-start="1428" data-line-end="1445">WIRESHARK = X-Ray machine for your network
+
+NORMAL NETWORK:
+Data travels invisibly through cables/WiFi
+You can't see what's going on!
+
+WITH WIRESHARK:
+You can SEE every single piece of data
+travelling on your network!
+
+You can see:
+• Who is talking to who
+• What websites people are visiting
+• Whether data is encrypted or readable
+• If someone is doing something suspicious
+• Network speed and quality (QoS)
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="1446" data-line-end="1447"><a id="Installing_Wireshark_1446"></a>Installing Wireshark</h3>
+<pre><code class="has-line-data language-bash" data-line-start="1449" data-line-end="1467"><span class="hljs-comment"># Install Wireshark on Ubuntu/Kali</span>
+<span class="hljs-built_in">sudo</span> apt install wireshark tshark -y
+
+<span class="hljs-comment"># During installation it asks:</span>
+<span class="hljs-comment"># &quot;Should non-superusers be able to capture packets?&quot;</span>
+<span class="hljs-comment"># Select YES (use arrow keys, then Tab to OK, then Enter)</span>
+
+<span class="hljs-comment"># Add yourself to wireshark group</span>
+<span class="hljs-built_in">sudo</span> usermod -aG wireshark <span class="hljs-variable">$USER</span>
+
+<span class="hljs-comment"># Log out and log back in for changes to take effect</span>
+<span class="hljs-comment"># Or run this to apply immediately:</span>
+newgrp wireshark
+
+<span class="hljs-comment"># Verify installation</span>
+wireshark --version
+tshark --version
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="1468" data-line-end="1469"><a id="Basic_Wireshark_Usage_1468"></a>Basic Wireshark Usage</h3>
+<pre><code class="has-line-data language-bash" data-line-start="1471" data-line-end="1501"><span class="hljs-comment"># ================================================</span>
+<span class="hljs-comment"># COMMAND LINE (tshark) - Easier for beginners</span>
+<span class="hljs-comment"># ================================================</span>
+
+<span class="hljs-comment"># See what network interfaces you have</span>
+tshark -D
+<span class="hljs-comment"># Output like:</span>
+<span class="hljs-comment"># 1. eth0 (Ethernet)</span>
+<span class="hljs-comment"># 2. wlan0 (WiFi)</span>
+<span class="hljs-comment"># 3. lo (Loopback)</span>
+
+<span class="hljs-comment"># Capture traffic for 30 seconds on eth0</span>
+<span class="hljs-comment"># Save to file</span>
+tshark -i eth0 -a duration:30 -w /tmp/my_capture.pcap
+
+<span class="hljs-comment"># Then open Wireshark to view the file</span>
+wireshark /tmp/my_capture.pcap
+
+<span class="hljs-comment"># Capture and show immediately on screen</span>
+tshark -i eth0 -a duration:10
+
+<span class="hljs-comment"># Capture only HTTP traffic</span>
+tshark -i eth0 -f <span class="hljs-string">&quot;port 80&quot;</span> -a duration:30
+
+<span class="hljs-comment"># Capture only traffic from specific IP</span>
+tshark -i eth0 -f <span class="hljs-string">&quot;host 192.168.1.100&quot;</span> -a duration:30
+
+<span class="hljs-comment"># Show statistics - what protocols are on your network</span>
+tshark -r /tmp/my_capture.pcap -q -z io,phs
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="1502" data-line-end="1503"><a id="Measuring_QoS_Parameters_1502"></a>Measuring QoS Parameters</h3>
+<pre><code class="has-line-data language-bash" data-line-start="1505" data-line-end="1539"><span class="hljs-comment"># ================================================</span>
+<span class="hljs-comment"># MEASURE QoS USING COMMAND LINE TOOLS</span>
+<span class="hljs-comment"># ================================================</span>
+
+<span class="hljs-comment"># 1. MEASURE LATENCY using ping</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;=== LATENCY TEST ===&quot;</span>
+ping -c 20 8.8.8.8
+<span class="hljs-comment"># Look at the last line:</span>
+<span class="hljs-comment"># &quot;rtt min/avg/max/mdev = 12.5/13.2/15.1/0.7 ms&quot;</span>
+<span class="hljs-comment"># avg = average latency (should be under 100ms)</span>
+
+<span class="hljs-comment"># 2. MEASURE PACKET LOSS using ping</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;=== PACKET LOSS TEST ===&quot;</span>
+ping -c 100 google.com | grep <span class="hljs-string">&quot;packet loss&quot;</span>
+<span class="hljs-comment"># Good: &quot;0% packet loss&quot;</span>
+<span class="hljs-comment"># Bad:  &quot;5% packet loss&quot; or more</span>
+
+<span class="hljs-comment"># 3. MEASURE BANDWIDTH using speedtest</span>
+<span class="hljs-built_in">sudo</span> apt install speedtest-cli -y
+speedtest-cli
+
+<span class="hljs-comment"># Or using iperf3 (need server and client)</span>
+<span class="hljs-comment"># On SERVER machine:</span>
+<span class="hljs-comment"># iperf3 -s</span>
+
+<span class="hljs-comment"># On CLIENT machine:</span>
+<span class="hljs-comment"># iperf3 -c &lt;server_ip&gt;</span>
+
+<span class="hljs-comment"># 4. CALCULATE JITTER manually</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;=== JITTER MEASUREMENT ===&quot;</span>
+ping -c 50 8.8.8.8 | grep <span class="hljs-string">&quot;time=&quot;</span> | \
+  awk -F<span class="hljs-string">&#x27;time=&#x27;</span> <span class="hljs-string">&#x27;{print $2}&#x27;</span> | awk <span class="hljs-string">&#x27;{print $1}&#x27;</span>
+<span class="hljs-comment"># Lower variation = lower jitter = better quality</span>
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="1540" data-line-end="1541"><a id="Simple_QoS_Measurement_Script_1540"></a>Simple QoS Measurement Script</h3>
+<pre><code class="has-line-data language-python" data-line-start="1543" data-line-end="1780"><span class="hljs-comment">#!/usr/bin/env python3</span>
+<span class="hljs-comment"># qos_simple.py</span>
+<span class="hljs-comment"># Simple QoS measurement tool for beginners</span>
+<span class="hljs-comment"># How to run: python3 qos_simple.py</span>
+
+<span class="hljs-keyword">import</span> subprocess
+<span class="hljs-keyword">import</span> re
+<span class="hljs-keyword">import</span> statistics
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">measure_latency</span>(<span class="hljs-params">target=<span class="hljs-string">&quot;8.8.8.8&quot;</span>, count=<span class="hljs-number">20</span></span>):
+    <span class="hljs-string">&quot;&quot;&quot;Measure latency by pinging a server.&quot;&quot;&quot;</span>
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n Measuring latency to <span class="hljs-subst">{target}</span>...&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot; Sending <span class="hljs-subst">{count}</span> pings, please wait...&quot;</span>)
+    
+    <span class="hljs-comment"># Run ping command</span>
+    <span class="hljs-keyword">try</span>:
+        result = subprocess.run(
+            [<span class="hljs-string">&quot;ping&quot;</span>, <span class="hljs-string">&quot;-c&quot;</span>, <span class="hljs-built_in">str</span>(count), target],
+            capture_output=<span class="hljs-literal">True</span>,
+            text=<span class="hljs-literal">True</span>,
+            timeout=<span class="hljs-number">60</span>
+        )
+        output = result.stdout
+    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot; Error: <span class="hljs-subst">{e}</span>&quot;</span>)
+        <span class="hljs-comment"># Use fake data for demonstration</span>
+        <span class="hljs-keyword">return</span> simulate_latency_data()
+    
+    <span class="hljs-comment"># Extract latency values from ping output</span>
+    latencies = []
+    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> output.split(<span class="hljs-string">&#x27;\n&#x27;</span>):
+        <span class="hljs-comment"># Look for lines like: &quot;64 bytes from ...: icmp_seq=1 ttl=54 time=12.5 ms&quot;</span>
+        <span class="hljs-keyword">match</span> = re.search(<span class="hljs-string">r&#x27;time=(\d+\.?\d*)&#x27;</span>, line)
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">match</span>:
+            latencies.append(<span class="hljs-built_in">float</span>(<span class="hljs-keyword">match</span>.group(<span class="hljs-number">1</span>)))
+    
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> latencies:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot; Could not get latency data, using simulated data&quot;</span>)
+        <span class="hljs-keyword">return</span> simulate_latency_data()
+    
+    <span class="hljs-keyword">return</span> latencies
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">simulate_latency_data</span>():
+    <span class="hljs-string">&quot;&quot;&quot;Return simulated latency data for demonstration.&quot;&quot;&quot;</span>
+    <span class="hljs-keyword">import</span> random
+    <span class="hljs-comment"># Simulate a mostly good connection with occasional spikes</span>
+    data = [random.uniform(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">18</span>)]
+    data.append(<span class="hljs-number">150.0</span>)  <span class="hljs-comment"># One spike</span>
+    data.append(<span class="hljs-number">12.0</span>)   <span class="hljs-comment"># Back to normal</span>
+    <span class="hljs-keyword">return</span> data
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">analyze_latency</span>(<span class="hljs-params">latencies</span>):
+    <span class="hljs-string">&quot;&quot;&quot;Analyze and explain latency measurements.&quot;&quot;&quot;</span>
+    
+    min_lat = <span class="hljs-built_in">min</span>(latencies)
+    max_lat = <span class="hljs-built_in">max</span>(latencies)
+    avg_lat = statistics.mean(latencies)
+    
+    <span class="hljs-comment"># Calculate jitter (variation in latency)</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(latencies) &gt; <span class="hljs-number">1</span>:
+        diffs = [<span class="hljs-built_in">abs</span>(latencies[i] - latencies[i-<span class="hljs-number">1</span>]) 
+                 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(latencies))]
+        jitter = statistics.mean(diffs)
+    <span class="hljs-keyword">else</span>:
+        jitter = <span class="hljs-number">0</span>
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span> + <span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">50</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  LATENCY ANALYSIS RESULTS&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">50</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  Lowest latency:  <span class="hljs-subst">{min_lat:<span class="hljs-number">.1</span>f}</span> ms&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Highest latency: <span class="hljs-subst">{max_lat:<span class="hljs-number">.1</span>f}</span> ms&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Average latency: <span class="hljs-subst">{avg_lat:<span class="hljs-number">.1</span>f}</span> ms&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Jitter:          <span class="hljs-subst">{jitter:<span class="hljs-number">.1</span>f}</span> ms&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Samples taken:   <span class="hljs-subst">{<span class="hljs-built_in">len</span>(latencies)}</span>&quot;</span>)
+    
+    <span class="hljs-comment"># Simple assessment</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n  ASSESSMENT:&quot;</span>)
+    
+    <span class="hljs-comment"># Latency check</span>
+    <span class="hljs-keyword">if</span> avg_lat &lt; <span class="hljs-number">50</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ✅ Latency: EXCELLENT! (<span class="hljs-subst">{avg_lat:<span class="hljs-number">.1</span>f}</span>ms)&quot;</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;     Your connection is very fast!&quot;</span>)
+    <span class="hljs-keyword">elif</span> avg_lat &lt; <span class="hljs-number">100</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ✓  Latency: GOOD (<span class="hljs-subst">{avg_lat:<span class="hljs-number">.1</span>f}</span>ms)&quot;</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;     Your connection is fine for most uses&quot;</span>)
+    <span class="hljs-keyword">elif</span> avg_lat &lt; <span class="hljs-number">200</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ⚠️  Latency: OKAY (<span class="hljs-subst">{avg_lat:<span class="hljs-number">.1</span>f}</span>ms)&quot;</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;     Might notice some slowness&quot;</span>)
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ❌ Latency: POOR (<span class="hljs-subst">{avg_lat:<span class="hljs-number">.1</span>f}</span>ms)&quot;</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;     Your connection is slow!&quot;</span>)
+    
+    <span class="hljs-comment"># Jitter check</span>
+    <span class="hljs-built_in">print</span>()
+    <span class="hljs-keyword">if</span> jitter &lt; <span class="hljs-number">10</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ✅ Jitter: EXCELLENT! (<span class="hljs-subst">{jitter:<span class="hljs-number">.1</span>f}</span>ms)&quot;</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;     Connection is very stable!&quot;</span>)
+    <span class="hljs-keyword">elif</span> jitter &lt; <span class="hljs-number">30</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ✓  Jitter: GOOD (<span class="hljs-subst">{jitter:<span class="hljs-number">.1</span>f}</span>ms)&quot;</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;     Video calls will work fine&quot;</span>)
+    <span class="hljs-keyword">elif</span> jitter &lt; <span class="hljs-number">50</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ⚠️  Jitter: OKAY (<span class="hljs-subst">{jitter:<span class="hljs-number">.1</span>f}</span>ms)&quot;</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;     Video calls might have slight issues&quot;</span>)
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ❌ Jitter: POOR (<span class="hljs-subst">{jitter:<span class="hljs-number">.1</span>f}</span>ms)&quot;</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;     Video calls will have problems!&quot;</span>)
+    
+    <span class="hljs-keyword">return</span> avg_lat, jitter
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">measure_packet_loss</span>(<span class="hljs-params">target=<span class="hljs-string">&quot;8.8.8.8&quot;</span>, count=<span class="hljs-number">100</span></span>):
+    <span class="hljs-string">&quot;&quot;&quot;Measure packet loss.&quot;&quot;&quot;</span>
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n Measuring packet loss (<span class="hljs-subst">{count}</span> packets)...&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot; Please wait...&quot;</span>)
+    
+    <span class="hljs-keyword">try</span>:
+        result = subprocess.run(
+            [<span class="hljs-string">&quot;ping&quot;</span>, <span class="hljs-string">&quot;-c&quot;</span>, <span class="hljs-built_in">str</span>(count), target],
+            capture_output=<span class="hljs-literal">True</span>,
+            text=<span class="hljs-literal">True</span>,
+            timeout=<span class="hljs-number">120</span>
+        )
+        output = result.stdout
+        
+        <span class="hljs-comment"># Find packet loss percentage</span>
+        <span class="hljs-keyword">match</span> = re.search(<span class="hljs-string">r&#x27;(\d+)% packet loss&#x27;</span>, output)
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">match</span>:
+            loss = <span class="hljs-built_in">float</span>(<span class="hljs-keyword">match</span>.group(<span class="hljs-number">1</span>))
+        <span class="hljs-keyword">else</span>:
+            loss = <span class="hljs-number">0.5</span>  <span class="hljs-comment"># Default if can&#x27;t parse</span>
+            
+    <span class="hljs-keyword">except</span> Exception:
+        loss = <span class="hljs-number">0.5</span>  <span class="hljs-comment"># Simulated data</span>
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span> + <span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">50</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  PACKET LOSS RESULTS&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">50</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  Packets sent: <span class="hljs-subst">{count}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Packets lost: <span class="hljs-subst">{<span class="hljs-built_in">int</span>(loss * count / <span class="hljs-number">100</span>)}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Packet loss:  <span class="hljs-subst">{loss}</span>%&quot;</span>)
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n  ASSESSMENT:&quot;</span>)
+    <span class="hljs-keyword">if</span> loss == <span class="hljs-number">0</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ✅ PERFECT! No packets lost!&quot;</span>)
+    <span class="hljs-keyword">elif</span> loss &lt; <span class="hljs-number">1</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ✓  GOOD! Only <span class="hljs-subst">{loss}</span>% lost - barely noticeable&quot;</span>)
+    <span class="hljs-keyword">elif</span> loss &lt; <span class="hljs-number">5</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ⚠️  OKAY - <span class="hljs-subst">{loss}</span>% loss - some quality issues&quot;</span>)
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ❌ POOR! <span class="hljs-subst">{loss}</span>% loss - serious network problems!&quot;</span>)
+    
+    <span class="hljs-keyword">return</span> loss
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">show_qos_summary</span>(<span class="hljs-params">avg_latency, jitter, packet_loss</span>):
+    <span class="hljs-string">&quot;&quot;&quot;Show final QoS summary with score.&quot;&quot;&quot;</span>
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span> + <span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">50</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  OVERALL QoS REPORT CARD&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">50</span>)
+    
+    <span class="hljs-comment"># Calculate simple score</span>
+    score = <span class="hljs-number">100</span>
+    
+    <span class="hljs-keyword">if</span> avg_latency &gt; <span class="hljs-number">50</span>:
+        score -= <span class="hljs-number">20</span>
+    <span class="hljs-keyword">if</span> avg_latency &gt; <span class="hljs-number">100</span>:
+        score -= <span class="hljs-number">20</span>
+    
+    <span class="hljs-keyword">if</span> jitter &gt; <span class="hljs-number">30</span>:
+        score -= <span class="hljs-number">15</span>
+    <span class="hljs-keyword">if</span> jitter &gt; <span class="hljs-number">50</span>:
+        score -= <span class="hljs-number">15</span>
+    
+    <span class="hljs-keyword">if</span> packet_loss &gt; <span class="hljs-number">1</span>:
+        score -= <span class="hljs-number">20</span>
+    <span class="hljs-keyword">if</span> packet_loss &gt; <span class="hljs-number">5</span>:
+        score -= <span class="hljs-number">20</span>
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  Latency Score:     <span class="hljs-subst">{<span class="hljs-string">&#x27;✅&#x27;</span> <span class="hljs-keyword">if</span> avg_latency &lt; <span class="hljs-number">100</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;❌&#x27;</span>}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Jitter Score:      <span class="hljs-subst">{<span class="hljs-string">&#x27;✅&#x27;</span> <span class="hljs-keyword">if</span> jitter &lt; <span class="hljs-number">30</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;❌&#x27;</span>}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Packet Loss Score: <span class="hljs-subst">{<span class="hljs-string">&#x27;✅&#x27;</span> <span class="hljs-keyword">if</span> packet_loss &lt; <span class="hljs-number">1</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;❌&#x27;</span>}</span>&quot;</span>)
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n  OVERALL QoS SCORE: <span class="hljs-subst">{score}</span>/100&quot;</span>)
+    
+    <span class="hljs-keyword">if</span> score &gt;= <span class="hljs-number">90</span>:
+        grade = <span class="hljs-string">&quot;A - EXCELLENT&quot;</span>
+        advice = <span class="hljs-string">&quot;Your network is in great shape!&quot;</span>
+    <span class="hljs-keyword">elif</span> score &gt;= <span class="hljs-number">80</span>:
+        grade = <span class="hljs-string">&quot;B - GOOD&quot;</span>
+        advice = <span class="hljs-string">&quot;Minor issues, but mostly fine&quot;</span>
+    <span class="hljs-keyword">elif</span> score &gt;= <span class="hljs-number">70</span>:
+        grade = <span class="hljs-string">&quot;C - ACCEPTABLE&quot;</span>
+        advice = <span class="hljs-string">&quot;Some problems, worth investigating&quot;</span>
+    <span class="hljs-keyword">elif</span> score &gt;= <span class="hljs-number">60</span>:
+        grade = <span class="hljs-string">&quot;D - POOR&quot;</span>
+        advice = <span class="hljs-string">&quot;Network has issues affecting users&quot;</span>
+    <span class="hljs-keyword">else</span>:
+        grade = <span class="hljs-string">&quot;F - CRITICAL&quot;</span>
+        advice = <span class="hljs-string">&quot;Network needs urgent attention!&quot;</span>
+    
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  GRADE: <span class="hljs-subst">{grade}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  ADVICE: <span class="hljs-subst">{advice}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span> + <span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">50</span>)
+
+<span class="hljs-comment"># Main program</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">50</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  NETWORK QoS MEASUREMENT TOOL&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;  (Simple version for beginners)&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">50</span>)
+<span class="hljs-built_in">print</span>()
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;What is QoS?&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Quality of Service = How good is your network?&quot;</span>)
+<span class="hljs-built_in">print</span>()
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;We will measure:&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;1. Latency  - How fast data travels&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;2. Jitter   - How consistent the speed is&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;3. Packet Loss - How much data gets lost&quot;</span>)
+<span class="hljs-built_in">print</span>()
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Press ENTER to start measuring...&quot;</span>)
+<span class="hljs-built_in">input</span>()
+
+<span class="hljs-comment"># Measure latency (also gives jitter)</span>
+latencies = measure_latency(<span class="hljs-string">&quot;8.8.8.8&quot;</span>, <span class="hljs-number">20</span>)
+avg_lat, jitter = analyze_latency(latencies)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nPress ENTER to measure packet loss...&quot;</span>)
+<span class="hljs-built_in">input</span>()
+
+<span class="hljs-comment"># Measure packet loss</span>
+packet_loss = measure_packet_loss(<span class="hljs-string">&quot;8.8.8.8&quot;</span>, <span class="hljs-number">50</span>)
+
+<span class="hljs-comment"># Show final summary</span>
+show_qos_summary(avg_lat, jitter, packet_loss)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nDone! You have successfully measured your network QoS!&quot;</span>)
+</code></pre>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="1783" data-line-end="1784"><a id="Simple_Summary_What_We_Learned_Today_1783"></a>Simple Summary - What We Learned Today</h2>
+<pre><code class="has-line-data" data-line-start="1786" data-line-end="1849">SESSION 1 SUMMARY (Simple Version)
+════════════════════════════════════════════════════════
+
+1. INFORMATION SECURITY
+   = Protecting digital data from bad people and accidents
+   
+   Remember CIA:
+   C = Confidentiality (Privacy - only right people see it)
+   I = Integrity (Accuracy - nobody changed it secretly)
+   A = Availability (Always working when you need it)
+
+════════════════════════════════════════════════════════
+
+2. WHY SECURITY?
+   Because cyberattacks cost HUGE money!
+   
+   India loses ₹1.25 lakh crore per year to cybercrime
+   Average breach costs ₹37 crore
+   
+   Prevention is ALWAYS cheaper than fixing!
+
+════════════════════════════════════════════════════════
+
+3. VULNERABILITY vs THREAT vs RISK
+
+   Vulnerability = WEAKNESS (broken lock)
+   Threat = DANGER (burglar)
+   Risk = DANGER + WEAKNESS together
+   
+   Risk = Probability × Impact
+
+════════════════════════════════════════════════════════
+
+4. INTERNET STATISTICS
+   
+   • 1 attack every 39 seconds
+   • 94% of websites have broken access control
+   • 300,000 new viruses created daily
+   • Always read OWASP reports!
+
+════════════════════════════════════════════════════════
+
+5. QoS (Quality of Service)
+
+   4 things to measure:
+   • Bandwidth  = How much data fits (like road width)
+   • Latency    = How fast data travels (under 100ms = good)
+   • Jitter     = How consistent speed is (under 30ms = good)
+   • Packet Loss = How much data gets lost (under 1% = good)
+   
+   Poor QoS = Availability problem = Security issue!
+
+════════════════════════════════════════════════════════
+
+6. TOOLS WE USED:
+   
+   ClamAV     = Antivirus scanner (free!)
+   OpenVAS    = Vulnerability scanner (finds weaknesses)
+   Wireshark  = Network analyzer (see all traffic)
+   ping       = Simple latency tester
+
+════════════════════════════════════════════════════════
+</code></pre>
+<h3 class="code-line has-line-data" data-line-start="1850" data-line-end="1851"><a id="Common_Exam_Questions_with_Simple_Answers_1850"></a>Common Exam Questions with Simple Answers</h3>
+<pre><code class="has-line-data" data-line-start="1853" data-line-end="1892">Q1: What is Information Security?
+A: Protecting digital data from unauthorized access,
+   modification, or unavailability using CIA principles.
+
+Q2: Explain CIA Triad with examples.
+A: 
+   C = Confidentiality = Only right people see data
+   Example: Only you can see your WhatsApp messages
+   
+   I = Integrity = Data is not changed without permission
+   Example: Your bank balance should not be secretly changed
+   
+   A = Availability = System works when needed
+   Example: ATM should work 24/7
+
+Q3: What is difference between Vulnerability and Threat?
+A:
+   Vulnerability = A WEAKNESS (e.g., weak password)
+   Threat = Something that CAN cause harm (e.g., hacker)
+   Risk = When threat meets vulnerability (hacker + weak password)
+
+Q4: What are QoS parameters?
+A:
+   1. Bandwidth - Network capacity
+   2. Latency - Time for data to travel
+   3. Jitter - Variation in latency
+   4. Packet Loss - % of data lost in transit
+
+Q5: Name OWASP Top 3 vulnerabilities.
+A:
+   1. Broken Access Control (94% of websites)
+   2. Cryptographic Failures (83%)
+   3. Injection Attacks (94%)
+
+Q6: How much does a data breach cost on average?
+A: 
+   Global average: $4.45 million USD
+   India average: ₹17.9 crore
+</code></pre>
+<hr>
+<p class="has-line-data" data-line-start="1896" data-line-end="1897"><strong>Key Points to Remember:</strong></p>
+<pre><code class="has-line-data" data-line-start="1898" data-line-end="1905">✓ CIA = Confidentiality, Integrity, Availability
+✓ Risk = Threat × Vulnerability  
+✓ Prevention is cheaper than fixing
+✓ OWASP shows us most common web problems
+✓ QoS = How good and reliable your network is
+✓ 1 cyberattack happens every 39 seconds!
+</code></pre>
+
+</body>
+</html>
