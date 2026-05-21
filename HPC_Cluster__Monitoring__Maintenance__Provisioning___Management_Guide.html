@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HPC Cluster: Monitoring, Maintenance, Provisioning & Management Guide.md</title>
+  <style>
+  @import url("https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css");
+
+  body {
+    font-family: Georgia, Cambria, serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #373D49;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.5em; }
+  h3 { font-size: 1.25em; }
+  a { color: #35D7BB; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: "Ubuntu Mono", Monaco, monospace;
+    background: #F5F7FA;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+  }
+  pre {
+    background: #F5F7FA;
+    padding: 1em;
+    border-radius: 3px;
+    overflow-x: auto;
+  }
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0;
+    color: #333;
+  }
+  pre code { background: none; padding: 0; }
+  blockquote {
+    border-left: 3px solid #A0AABF;
+    padding-left: 1em;
+    margin-left: 0;
+    font-style: italic;
+    color: #666;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #E8E8E8;
+    padding: 0.5em;
+    text-align: left;
+  }
+  th {
+    background: #F5F7FA;
+    font-weight: 600;
+  }
+  #preview .table {
+    width: auto;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+</style>
+</head>
+<body id="preview">
+<h1 class="code-line has-line-data" data-line-start="0" data-line-end="1"><a id="Basic_iptables_Commands_Linux_Firewall_0"></a>Basic <code>iptables</code> Commands (Linux Firewall)</h1>
+<p class="has-line-data" data-line-start="2" data-line-end="3"><code>iptables</code> is a Linux firewall utility used to allow, block, and manage network traffic.</p>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="6" data-line-end="7"><a id="1_Check_Current_Rules_6"></a>1. Check Current Rules</h1>
+<pre><code class="has-line-data language-bash" data-line-start="9" data-line-end="11"><span class="hljs-built_in">sudo</span> iptables -L
+</code></pre>
+<p class="has-line-data" data-line-start="12" data-line-end="13">Detailed output:</p>
+<pre><code class="has-line-data language-bash" data-line-start="15" data-line-end="17"><span class="hljs-built_in">sudo</span> iptables -L -v -n
+</code></pre>
+<ul>
+<li class="has-line-data" data-line-start="18" data-line-end="19"><code>-L</code> → List rules</li>
+<li class="has-line-data" data-line-start="19" data-line-end="20"><code>-v</code> → Verbose</li>
+<li class="has-line-data" data-line-start="20" data-line-end="22"><code>-n</code> → Show IPs/ports numerically</li>
+</ul>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="24" data-line-end="25"><a id="2_Allow_All_Traffic_Temporary_24"></a>2. Allow All Traffic (Temporary)</h1>
+<pre><code class="has-line-data language-bash" data-line-start="27" data-line-end="31"><span class="hljs-built_in">sudo</span> iptables -P INPUT ACCEPT
+<span class="hljs-built_in">sudo</span> iptables -P OUTPUT ACCEPT
+<span class="hljs-built_in">sudo</span> iptables -P FORWARD ACCEPT
+</code></pre>
+<p class="has-line-data" data-line-start="32" data-line-end="33"><code>-P</code> = Default policy</p>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="36" data-line-end="37"><a id="3_Block_All_Incoming_Traffic_36"></a>3. Block All Incoming Traffic</h1>
+<pre><code class="has-line-data language-bash" data-line-start="39" data-line-end="41"><span class="hljs-built_in">sudo</span> iptables -P INPUT DROP
+</code></pre>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="44" data-line-end="45"><a id="4_Allow_SSH_Port_22_44"></a>4. Allow SSH (Port 22)</h1>
+<pre><code class="has-line-data language-bash" data-line-start="47" data-line-end="49"><span class="hljs-built_in">sudo</span> iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+</code></pre>
+<ul>
+<li class="has-line-data" data-line-start="50" data-line-end="51"><code>-A</code> → Append rule</li>
+<li class="has-line-data" data-line-start="51" data-line-end="52"><code>-p tcp</code> → TCP protocol</li>
+<li class="has-line-data" data-line-start="52" data-line-end="53"><code>--dport 22</code> → Destination port 22</li>
+<li class="has-line-data" data-line-start="53" data-line-end="55"><code>-j ACCEPT</code> → Allow traffic</li>
+</ul>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="57" data-line-end="58"><a id="5_Allow_HTTP_and_HTTPS_57"></a>5. Allow HTTP and HTTPS</h1>
+<p class="has-line-data" data-line-start="59" data-line-end="60">HTTP:</p>
+<pre><code class="has-line-data language-bash" data-line-start="62" data-line-end="64"><span class="hljs-built_in">sudo</span> iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+</code></pre>
+<p class="has-line-data" data-line-start="65" data-line-end="66">HTTPS:</p>
+<pre><code class="has-line-data language-bash" data-line-start="68" data-line-end="70"><span class="hljs-built_in">sudo</span> iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+</code></pre>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="73" data-line-end="74"><a id="6_Block_an_IP_Address_73"></a>6. Block an IP Address</h1>
+<pre><code class="has-line-data language-bash" data-line-start="76" data-line-end="78"><span class="hljs-built_in">sudo</span> iptables -A INPUT -s 192.168.1.10 -j DROP
+</code></pre>
+<ul>
+<li class="has-line-data" data-line-start="79" data-line-end="81"><code>-s</code> → Source IP</li>
+</ul>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="83" data-line-end="84"><a id="7_Allow_Traffic_from_Specific_IP_83"></a>7. Allow Traffic from Specific IP</h1>
+<pre><code class="has-line-data language-bash" data-line-start="86" data-line-end="88"><span class="hljs-built_in">sudo</span> iptables -A INPUT -s 192.168.1.20 -j ACCEPT
+</code></pre>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="91" data-line-end="92"><a id="8_Delete_a_Rule_91"></a>8. Delete a Rule</h1>
+<p class="has-line-data" data-line-start="93" data-line-end="94">First list rules with numbers:</p>
+<pre><code class="has-line-data language-bash" data-line-start="96" data-line-end="98"><span class="hljs-built_in">sudo</span> iptables -L --line-numbers
+</code></pre>
+<p class="has-line-data" data-line-start="99" data-line-end="100">Delete rule:</p>
+<pre><code class="has-line-data language-bash" data-line-start="102" data-line-end="104"><span class="hljs-built_in">sudo</span> iptables -D INPUT 1
+</code></pre>
+<p class="has-line-data" data-line-start="105" data-line-end="106">Deletes rule number 1.</p>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="109" data-line-end="110"><a id="9_Flush_All_Rules_109"></a>9. Flush All Rules</h1>
+<pre><code class="has-line-data language-bash" data-line-start="112" data-line-end="114"><span class="hljs-built_in">sudo</span> iptables -F
+</code></pre>
+<p class="has-line-data" data-line-start="115" data-line-end="116"><code>-F</code> = Flush</p>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="119" data-line-end="120"><a id="10_Save_Rules_119"></a>10. Save Rules</h1>
+<h2 class="code-line has-line-data" data-line-start="121" data-line-end="122"><a id="UbuntuDebian_121"></a>Ubuntu/Debian</h2>
+<p class="has-line-data" data-line-start="123" data-line-end="124">Install:</p>
+<pre><code class="has-line-data language-bash" data-line-start="126" data-line-end="128"><span class="hljs-built_in">sudo</span> apt install iptables-persistent
+</code></pre>
+<p class="has-line-data" data-line-start="129" data-line-end="130">Save:</p>
+<pre><code class="has-line-data language-bash" data-line-start="132" data-line-end="134"><span class="hljs-built_in">sudo</span> netfilter-persistent save
+</code></pre>
+<hr>
+<h2 class="code-line has-line-data" data-line-start="137" data-line-end="138"><a id="RHELCentOS_137"></a>RHEL/CentOS</h2>
+<pre><code class="has-line-data language-bash" data-line-start="140" data-line-end="142"><span class="hljs-built_in">sudo</span> service iptables save
+</code></pre>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="145" data-line-end="146"><a id="11_Allow_Established_Connections_Stateful_Firewall_145"></a>11. Allow Established Connections (Stateful Firewall)</h1>
+<pre><code class="has-line-data language-bash" data-line-start="148" data-line-end="150"><span class="hljs-built_in">sudo</span> iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+</code></pre>
+<p class="has-line-data" data-line-start="151" data-line-end="152">This is important for SPI (Stateful Packet Inspection) firewall.</p>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="155" data-line-end="156"><a id="12_Allow_Loopback_Traffic_155"></a>12. Allow Loopback Traffic</h1>
+<pre><code class="has-line-data language-bash" data-line-start="158" data-line-end="160"><span class="hljs-built_in">sudo</span> iptables -A INPUT -i lo -j ACCEPT
+</code></pre>
+<p class="has-line-data" data-line-start="161" data-line-end="162"><code>lo</code> = localhost interface</p>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="165" data-line-end="166"><a id="13_Basic_Secure_Firewall_Example_165"></a>13. Basic Secure Firewall Example</h1>
+<pre><code class="has-line-data language-bash" data-line-start="168" data-line-end="182"><span class="hljs-built_in">sudo</span> iptables -F
+
+<span class="hljs-built_in">sudo</span> iptables -P INPUT DROP
+<span class="hljs-built_in">sudo</span> iptables -P FORWARD DROP
+<span class="hljs-built_in">sudo</span> iptables -P OUTPUT ACCEPT
+
+<span class="hljs-built_in">sudo</span> iptables -A INPUT -i lo -j ACCEPT
+
+<span class="hljs-built_in">sudo</span> iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+<span class="hljs-built_in">sudo</span> iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+<span class="hljs-built_in">sudo</span> iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+<span class="hljs-built_in">sudo</span> iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+</code></pre>
+<p class="has-line-data" data-line-start="183" data-line-end="184">This:</p>
+<ul>
+<li class="has-line-data" data-line-start="185" data-line-end="186">Blocks unwanted traffic</li>
+<li class="has-line-data" data-line-start="186" data-line-end="187">Allows SSH</li>
+<li class="has-line-data" data-line-start="187" data-line-end="188">Allows web traffic</li>
+<li class="has-line-data" data-line-start="188" data-line-end="190">Allows established connections</li>
+</ul>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="192" data-line-end="193"><a id="Important_Chains_192"></a>Important Chains</h1>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Chain</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INPUT</td>
+<td>Incoming traffic</td>
+</tr>
+<tr>
+<td>OUTPUT</td>
+<td>Outgoing traffic</td>
+</tr>
+<tr>
+<td>FORWARD</td>
+<td>Routed traffic</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="202" data-line-end="203"><a id="Common_Targets_202"></a>Common Targets</h1>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Target</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACCEPT</td>
+<td>Allow</td>
+</tr>
+<tr>
+<td>DROP</td>
+<td>Silently block</td>
+</tr>
+<tr>
+<td>REJECT</td>
+<td>Block with response</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="212" data-line-end="213"><a id="Useful_Practice_Tasks_212"></a>Useful Practice Tasks</h1>
+<ol>
+<li class="has-line-data" data-line-start="214" data-line-end="215">Allow only SSH traffic.</li>
+<li class="has-line-data" data-line-start="215" data-line-end="216">Block one IP address.</li>
+<li class="has-line-data" data-line-start="216" data-line-end="217">Allow ping requests.</li>
+<li class="has-line-data" data-line-start="217" data-line-end="218">Create rules for web server.</li>
+<li class="has-line-data" data-line-start="218" data-line-end="219">Make default INPUT policy DROP.</li>
+<li class="has-line-data" data-line-start="219" data-line-end="221">Save and restore rules.</li>
+</ol>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="223" data-line-end="224"><a id="Check_Rules_Continuously_223"></a>Check Rules Continuously</h1>
+<pre><code class="has-line-data language-bash" data-line-start="226" data-line-end="228">watch -n 1 <span class="hljs-built_in">sudo</span> iptables -L -v -n
+</code></pre>
+<p class="has-line-data" data-line-start="229" data-line-end="230">Updates every second.</p>
+<hr>
+<h1 class="code-line has-line-data" data-line-start="233" data-line-end="234"><a id="Modern_Alternative_233"></a>Modern Alternative</h1>
+<p class="has-line-data" data-line-start="235" data-line-end="236">New Linux systems use <code>nftables</code> or <code>firewalld</code>, but <code>iptables</code> is still very important in:</p>
+<ul>
+<li class="has-line-data" data-line-start="237" data-line-end="238">Cybersecurity</li>
+<li class="has-line-data" data-line-start="238" data-line-end="239">Linux administration</li>
+<li class="has-line-data" data-line-start="239" data-line-end="240">Networking labs</li>
+<li class="has-line-data" data-line-start="240" data-line-end="241">CEH/PenTesting</li>
+<li class="has-line-data" data-line-start="241" data-line-end="242">HPC clusters</li>
+<li class="has-line-data" data-line-start="242" data-line-end="243">Cloud VMs</li>
+</ul>
+
+</body>
+</html>
